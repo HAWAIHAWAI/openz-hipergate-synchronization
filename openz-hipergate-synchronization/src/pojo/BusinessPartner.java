@@ -104,7 +104,7 @@ public class BusinessPartner {
 	 */
 	@Override
 	public String toString() {
-		return "BusinessPartner [businessPartnerKey=" + id
+		return "BusinessPartner [id=" + id
 				+ ", value=" + value + ", name=" + name + ", name2=" + name2
 				+ ", taxNumber=" + taxNumber + ", description=" + description
 				+ ", BusinessPartnerGroup=" + bpGroup + "]";

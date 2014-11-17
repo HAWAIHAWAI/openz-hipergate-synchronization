@@ -242,7 +242,7 @@ public class BusinessPartnerGroup {
 
 	@Override
 	public String toString() {
-		return "Branche [id=" + id + ", ClientID=" + ClientID + ", OrgID="
+		return "BusinessPartnerGroup [id=" + id + ", ClientID=" + ClientID + ", OrgID="
 				+ OrgID + ", isActive=" + isActive + ", created=" + created
 				+ ", createdBy=" + createdBy + ", updated=" + updated
 				+ ", updatedBy=" + updatedBy + ", value=" + value + ", name="
