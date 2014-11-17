@@ -8,7 +8,7 @@ public class EntityManagerUtil {
 
 	public static EntityManager getEntityManager() {
 		try{
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("openz-csv-export");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("openz-hipergate-synchronization");
 		EntityManager em = emf.createEntityManager();
 		System.out.println("em.getProperties(): " + em.getProperties());
 		em.getTransaction().begin();
