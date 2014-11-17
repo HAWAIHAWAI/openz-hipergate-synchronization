@@ -1,5 +1,6 @@
 database
 database.tests
 io
+io.tests
 pojo
 pojo.tests

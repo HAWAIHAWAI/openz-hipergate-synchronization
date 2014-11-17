@@ -23,4 +23,22 @@ public class BusinessPartnerUtil {
 		TypedQuery<BusinessPartner> query = em.createNamedQuery(BusinessPartner.FIND_ALL_BP, BusinessPartner.class);
 		return query.getResultList();
 	}
+	
+	/**
+	 * @param bp Persist new or updated BusinessPartner
+	 */
+	public static void persistBusinessPartner(BusinessPartner bp){
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		em.persist(bp);
+		em.getTransaction().commit();
+	}
+	
+	/**
+	 * @param bp Remove businessPartner from persistence context
+	 */
+	public static void removeBusinessPartner(BusinessPartner bp){
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		em.remove(bp);
+		em.getTransaction().commit();
+	}
 }

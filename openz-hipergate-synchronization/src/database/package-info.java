@@ -1,8 +1,6 @@
 /**
- * 
- */
-/**
- * @author HAWAI
+ * Database related classes
+ * @author cglaeser
  *
  */
 package database;
