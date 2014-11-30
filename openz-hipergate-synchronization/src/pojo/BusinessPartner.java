@@ -1,5 +1,7 @@
 package pojo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,7 +29,12 @@ import javax.persistence.Table;
                     query = "SELECT b " +
         		            "FROM BusinessPartner b ")
 })
-public class BusinessPartner {
+public class BusinessPartner implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -483133666998315194L;
 	
 	private String id;
 	private String value;

@@ -1,5 +1,6 @@
 package pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,9 +35,14 @@ import javax.persistence.TemporalType;
                     query = "SELECT b " +
         		            "FROM BusinessPartnerGroup b ")
 })
-public class BusinessPartnerGroup {
+public class BusinessPartnerGroup implements Serializable {
 
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2038990287130585695L;
 
 	private String id;
 	
