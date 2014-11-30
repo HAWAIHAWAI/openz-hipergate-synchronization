@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 import pojo.BusinessPartner;
 
 import com.thoughtworks.xstream.XStream;
@@ -15,5 +16,11 @@ public class BusinessPartnerXML {
 	XStream xstream = new XStream(new DomDriver());
 	//xstream.alias("billNumber", String.class);
 	return xstream.toXML(database.BusinessPartnerUtil.getBusinessPartner(id));
+	}
+
+	public static String getAllBusinessPartners() {
+		XStream xstream = new XStream(new DomDriver());
+		//xstream.alias("billNumber", String.class);
+		return xstream.toXML(database.BusinessPartnerUtil.getAllBusinessPartners());
 	}
 }

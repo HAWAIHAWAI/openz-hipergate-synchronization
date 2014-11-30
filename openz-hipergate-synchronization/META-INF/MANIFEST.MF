@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: openz-hipergate-synchronization
+Bundle-SymbolicName: openz-hipergate-synchronization
+Bundle-Version: 1.0.0.qualifier
+Export-Package: database,
+ database.tests,
+ io,
+ io.tests,
+ io.web,
+ io.xml,
+ pojo,
+ pojo.tests
