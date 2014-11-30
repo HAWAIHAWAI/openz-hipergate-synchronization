@@ -14,14 +14,14 @@ public class BusinessPartnerGroupTest {
 	
 	@Test
 	public void getBrancheByIDTest(){
-		BusinessPartnerGroup branche = BusinessPartnerGroupUtil.getGroup("79271736C3474B3AB0F21668B7828A00");
+		BusinessPartnerGroup branche = BusinessPartnerGroupUtil.getBusinessPartnerGroup("79271736C3474B3AB0F21668B7828A00");
 		System.out.println(branche);
 		assertTrue(branche.getName().equals("Mitarbeiter"));
 	}
 	
 	@Test
 	public void getAllBranchen(){
-		List<BusinessPartnerGroup> branchen = BusinessPartnerGroupUtil.getAllGroups();
+		List<BusinessPartnerGroup> branchen = BusinessPartnerGroupUtil.getAllBusinessPartnerGroups();
 		System.out.println(branchen);
 		assertTrue(branchen.size() == 3);
 	}

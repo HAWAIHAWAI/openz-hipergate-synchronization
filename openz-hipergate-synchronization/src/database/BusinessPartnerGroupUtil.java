@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import pojo.BusinessPartnerGroup;
 
 public class BusinessPartnerGroupUtil {
-	public static BusinessPartnerGroup getGroup(String id){
+	public static BusinessPartnerGroup getBusinessPartnerGroup(String id){
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(BusinessPartnerGroup.FIND_BRANCHE_BY_ID, BusinessPartnerGroup.class);
 		System.out.println("Query" + query);
@@ -18,9 +18,10 @@ public class BusinessPartnerGroupUtil {
 		return query.getSingleResult();
 	}
 	
-	public static List<BusinessPartnerGroup> getAllGroups() {
+	public static List<BusinessPartnerGroup> getAllBusinessPartnerGroups() {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(BusinessPartnerGroup.FIND_ALL_BRANCHEN, BusinessPartnerGroup.class);
 		return query.getResultList();
 	}
+
 }

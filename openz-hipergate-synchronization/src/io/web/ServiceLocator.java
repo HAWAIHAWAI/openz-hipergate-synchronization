@@ -10,11 +10,25 @@ import javax.ws.rs.core.Application;
 
 @ApplicationPath("/service")
 public class ServiceLocator extends Application {
+	  Set<Class<?>> services;
+	  
+	  public ServiceLocator(){
+		  services = new HashSet<Class<?>>();
+		  addService(BusinessPartnerGroupService.class);
+		  addService(BusinessPartnerService.class);
+	  }
+	  
 	  @Override
 	  public Set<Class<?>> getClasses()
 	  {
-	    Set<Class<?>> s = new HashSet<Class<?>>();
-	    s.add(BusinessPartnerService.class);
-	    return s;
+	    return services;
+	  }
+	  
+	  public void addService(Class<?> service){
+		    services.add(service);
+	  }
+	  
+	  public void removeService(Class<?> service){
+		  services.remove(service);
 	  }
 }
