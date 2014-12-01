@@ -158,7 +158,7 @@ public class OpenZGeschaeftspartner implements java.io.Serializable{
 		result = prime * result + ((land == null) ? 0 : land.hashCode());
 		result = prime * result + postleitzahl;
 		result = prime * result + ((stadt == null) ? 0 : stadt.hashCode());
-		result = prime * result + steuernummer;
+		result = prime * result + steuernummer.hashCode();
 		result = prime * result
 				+ ((straﬂe1UndNr == null) ? 0 : straﬂe1UndNr.hashCode());
 		result = prime * result
@@ -208,7 +208,7 @@ public class OpenZGeschaeftspartner implements java.io.Serializable{
 				return false;
 		} else if (!stadt.equals(other.stadt))
 			return false;
-		if (steuernummer != other.steuernummer)
+		if (!steuernummer.equals(other.steuernummer))
 			return false;
 		if (straﬂe1UndNr == null) {
 			if (other.straﬂe1UndNr != null)
