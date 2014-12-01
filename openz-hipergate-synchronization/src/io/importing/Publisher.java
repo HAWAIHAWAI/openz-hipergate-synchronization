@@ -16,7 +16,7 @@ import java.io.ObjectOutputStream;
  *
  * @author Hawai
  */
-public class Publisher {
+public class Publisher<T> {
 
     public final String outputQueue;
     private Connection connection = null;
@@ -32,7 +32,7 @@ public class Publisher {
         channel.basicPublish("", this.outputQueue, null, message.getBytes());
     }
 
-    public void publish(Object message) throws IOException {
+    public void publish(T message) throws IOException {
         Channel channel = connection.createChannel();
         channel.queueDeclarePassive(this.outputQueue);
         channel.basicPublish("", this.outputQueue, null, Converter.serialize(message));
@@ -43,7 +43,7 @@ public class Publisher {
         channel.queuePurge(this.outputQueue);
     }
     
-    public void pushTo(String queue, Object message) throws IOException{
+    public void pushTo(String queue, T message) throws IOException{
         Channel channel = connection.createChannel();
         channel.queueDeclarePassive(queue);
         channel.basicPublish("", queue, null, Converter.serialize(message));

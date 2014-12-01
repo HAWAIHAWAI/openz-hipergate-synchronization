@@ -15,18 +15,18 @@ import java.io.ObjectOutputStream;
  *
  * @author HAWAI
  */
-public class Converter {
+public class Converter<T> {
     
-    public static byte[] serialize(Object obj) throws IOException {
+    public static <T> byte[] serialize(T obj) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ObjectOutputStream os = new ObjectOutputStream(out);
         os.writeObject(obj);
         return out.toByteArray();
     }
 
-    public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException {
+    public static <T> T deserialize(byte[] data) throws IOException, ClassNotFoundException {
         ByteArrayInputStream in = new ByteArrayInputStream(data);
         ObjectInputStream is = new ObjectInputStream(in);
-        return is.readObject();
+        return (T) is.readObject();
     }
 }

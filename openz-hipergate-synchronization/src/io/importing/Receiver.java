@@ -15,7 +15,7 @@ import java.io.IOException;
  *
  * @author Hawai
  */
-public class Receiver {
+public class Receiver<T> {
 
     private final String inputQueue;
     public Connection connection = null;
@@ -27,13 +27,13 @@ public class Receiver {
 
     }
     
-    public Object receive() throws InterruptedException, IOException, ClassNotFoundException{
+    public T receive() throws InterruptedException, IOException, ClassNotFoundException{
         Channel channel = this.connection.createChannel();
         QueueingConsumer consumer = new QueueingConsumer(channel);
         channel.queueDeclarePassive(this.inputQueue);
         channel.basicConsume(this.inputQueue, true, consumer);
         Delivery deliver = consumer.nextDelivery();
-        return Converter.deserialize(deliver.getBody());
+        return (T) Converter.deserialize(deliver.getBody());
     }
 
     void purge() throws IOException {
@@ -41,12 +41,12 @@ public class Receiver {
         channel.queuePurge(this.inputQueue);
     }
     
-    public Object receiveFrom(String queue) throws IOException, ClassNotFoundException, InterruptedException{
+    public T receiveFrom(String queue) throws IOException, ClassNotFoundException, InterruptedException{
         Channel channel = this.connection.createChannel();
         QueueingConsumer consumer = new QueueingConsumer(channel);
         channel.queueDeclarePassive(queue);
         channel.basicConsume(queue, true, consumer);
         Delivery deliver = consumer.nextDelivery();
-        return Converter.deserialize(deliver.getBody());
+        return (T) Converter.deserialize(deliver.getBody());
     }
 }

@@ -1,11 +1,13 @@
 package pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -42,7 +44,7 @@ public class BusinessPartner implements Serializable {
 	private String name2;
 	private String taxNumber;
 	private String description;
-	private BusinessPartnerGroup bpGroup;
+	private List<BusinessPartnerGroup> bpGroup;
 	
 	public static final String FIND_BP_BY_ID = "findBusinessPartnerByID";
 	public static final String FIND_ALL_BP = "findAllBusinessPartners";
@@ -74,14 +76,20 @@ public class BusinessPartner implements Serializable {
 		this.name = name;
 	}
 	
-	@ManyToOne
+	@ManyToMany
 	@JoinColumn(name="c_bp_group_id", nullable=false)
-	public BusinessPartnerGroup getBpGroup() {
+	public List<BusinessPartnerGroup> getBpGroup() {
 		return bpGroup;
 	}
-	public void setBpGroup(BusinessPartnerGroup bpGroup) {
-		this.bpGroup = bpGroup;
+	
+	public void addBpGroup(BusinessPartnerGroup bpGroup) {
+		this.bpGroup.add(bpGroup);
 	}
+	
+	public void removeBusinessPartnerGroup(BusinessPartnerGroup bp){
+		this.bpGroup.remove(bp);
+	}
+	
 	@Column(name="taxid")
 	public String getTaxNumber() {
 		return taxNumber;

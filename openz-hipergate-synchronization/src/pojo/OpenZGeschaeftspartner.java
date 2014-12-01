@@ -6,6 +6,7 @@
 package pojo;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -14,7 +15,8 @@ import java.util.List;
 public class OpenZGeschaeftspartner implements java.io.Serializable{
 
     /* Steuernummer des Unternehmens. Sollte eindeutig sein.*/
-    public int steuernummer = -1;
+	public String id;
+    public String steuernummer = "";
     public String unternehmensName = null;;
     public String straße1UndNr = null;
     public String straße2UndNr = null;
@@ -34,11 +36,25 @@ public class OpenZGeschaeftspartner implements java.io.Serializable{
 
     public OpenZGeschaeftspartner(){}
 
-    public int getSteuernummer() {
+    public String getSteuernummer() {
         return steuernummer;
     }
 
-    public String getUnternehmensName() {
+    /**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getUnternehmensName() {
         return unternehmensName;
     }
 
@@ -82,7 +98,7 @@ public class OpenZGeschaeftspartner implements java.io.Serializable{
         return timestamp;
     }
 
-    public void setSteuernummer(int steuernummer) {
+    public void setSteuernummer(String steuernummer) {
         this.steuernummer = steuernummer;
     }
 

@@ -7,6 +7,7 @@ package io.importing;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Hawai
  */
-public class MessagingServiceFacade implements IMessagingService {
+public class MessagingServiceFacade<T> implements IMessagingService<T> {
 
     private final String InputQueueName = "HAWAI_QUEUE_INPUT";
     private final String OutputQueueName = "HAWAI_QUEUE_OUTPUT";
@@ -49,7 +50,8 @@ public class MessagingServiceFacade implements IMessagingService {
      * Gibt den Inhalt einer Nachricht, als String zurück.
      * Gibt null zurück, wenn Fehler beim Abfruf aufgetreten sind.
      */
-    public String warteSynchronAufNachrichten() {
+    @SuppressWarnings("unchecked")
+	public String warteSynchronAufNachrichten() {
         try {
             return (String) this.receiver.receive();
         } catch (InterruptedException ex) {
@@ -76,9 +78,9 @@ public class MessagingServiceFacade implements IMessagingService {
         }
     }
 
-    public String pullMessage(){
+    public T pullMessage(){
         try {
-            return (String) this.receiver.receive();
+            return (T) this.receiver.receive();
         } catch (InterruptedException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -89,7 +91,7 @@ public class MessagingServiceFacade implements IMessagingService {
         return null;
     }
 
-    public void pushMessage(Object obj) {
+    public void pushMessage(T obj) {
         try {
             this.publisher.publish(obj);
         } catch (IOException ex) {
@@ -106,9 +108,9 @@ public class MessagingServiceFacade implements IMessagingService {
         }
     }
 
-    public Object pullMessageFromOutputQueue() {
+    public T pullMessageFromOutputQueue() {
         try {
-            return this.receiver.receiveFrom(OutputQueueName);
+            return (T) this.receiver.receiveFrom(OutputQueueName);
         } catch (IOException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
