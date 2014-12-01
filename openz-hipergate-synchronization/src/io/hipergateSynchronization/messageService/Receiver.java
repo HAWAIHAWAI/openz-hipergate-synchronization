@@ -7,10 +7,14 @@ package io.hipergateSynchronization.messageService;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.QueueingConsumer.Delivery;
+import com.rabbitmq.client.ShutdownSignalException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -37,6 +41,20 @@ public class Receiver<T> {
         Delivery deliver = consumer.nextDelivery();
         return (T) Converter.deserialize(deliver.getBody());
     }
+    
+    @SuppressWarnings("unchecked")
+	public List<T> receiveAll() throws InterruptedException, IOException, ClassNotFoundException{
+    	List<T> list = new ArrayList<T>();
+        Channel channel = this.connection.createChannel();
+        while(channel.queueDeclarePassive(this.inputQueue).getMessageCount()>0){
+        QueueingConsumer consumer = new QueueingConsumer(channel);
+        channel.queueDeclarePassive(this.inputQueue);
+        channel.basicConsume(this.inputQueue, true, consumer);
+        Delivery deliver = consumer.nextDelivery();
+        list.add((T) Converter.deserialize(deliver.getBody()));
+        }
+        return list;
+    } 
 
     void purge() throws IOException {
         Channel channel = connection.createChannel();

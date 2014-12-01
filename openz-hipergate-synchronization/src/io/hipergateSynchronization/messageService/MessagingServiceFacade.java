@@ -11,11 +11,12 @@ import com.rabbitmq.client.Connection;
 import global.Settings;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
  *
- * @author Hawai
+ * @author Daniel Glake, cglaeser
  */
 public class MessagingServiceFacade<T> implements IMessagingService<T> {
 
@@ -89,7 +90,7 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
 
     public T pullMessage(){
         try {
-            return (T) this.receiver.receive();
+            return this.receiver.receive();
         } catch (InterruptedException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -99,6 +100,20 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
         }
         return null;
     }
+    
+	@Override
+	public List<T> pullMessages() {
+		try {
+            return this.receiver.receiveAll();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+	}
 
     public void pushMessage(T obj) {
         try {

@@ -5,6 +5,10 @@
 
 package io.hipergateSynchronization.messageService;
 
+import java.util.List;
+
+import pojo.OpenZGeschaeftspartner;
+
 /**
  *
  * @author Hawai
@@ -19,7 +23,11 @@ public interface IMessagingService<T> {
     
     public T pullMessage();
     
+	public List<T> pullMessages();
+    
     public void purgeAllQueues();
 
     public T pullMessageFromOutputQueue();
+
+
 }
