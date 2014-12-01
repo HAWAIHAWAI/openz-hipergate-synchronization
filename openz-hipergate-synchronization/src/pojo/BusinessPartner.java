@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * 
@@ -33,7 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
                     query = "SELECT b " +
         		            "FROM BusinessPartner b ")
 })
-@XmlRootElement(name="businessPartner")
 public class BusinessPartner implements Serializable {
 	
 	/**
@@ -55,7 +52,6 @@ public class BusinessPartner implements Serializable {
 	
 	@Id
 	@Column(name=PARAM_ID)
-	@XmlAttribute(name="id")
 	public String getID() {
 		return id;
 	}
@@ -64,7 +60,6 @@ public class BusinessPartner implements Serializable {
 	}
 	
 	@Column(name="value")
-	@XmlAttribute(name="value")
 	public String getValue() {
 		return value;
 	}
@@ -74,7 +69,6 @@ public class BusinessPartner implements Serializable {
 	
 	@Id
 	@Column(name="name")
-	@XmlAttribute(name="name")
 	public String getName() {
 		return name;
 	}
