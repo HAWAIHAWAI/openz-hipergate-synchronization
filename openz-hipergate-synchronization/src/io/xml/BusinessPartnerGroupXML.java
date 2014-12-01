@@ -8,13 +8,13 @@ public class BusinessPartnerGroupXML {
 	public static String getAllBusinessPartnerGroups() {
 		XStream xstream = new XStream(new DomDriver());
 		//xstream.alias("billNumber", String.class);
-		return xstream.toXML(database.BusinessPartnerGroupUtil.getAllBusinessPartnerGroups());
+		return xstream.toXML(io.database.BusinessPartnerGroupUtil.getAllBusinessPartnerGroups());
 	}
 
 	public static String getBusinessPartnerGroupByID(String id) {
 		XStream xstream = new XStream(new DomDriver());
 		//xstream.alias("billNumber", String.class);
-		return xstream.toXML(database.BusinessPartnerGroupUtil.getBusinessPartnerGroup(id));
+		return xstream.toXML(io.database.BusinessPartnerGroupUtil.getBusinessPartnerGroup(id));
 	}
 
 }

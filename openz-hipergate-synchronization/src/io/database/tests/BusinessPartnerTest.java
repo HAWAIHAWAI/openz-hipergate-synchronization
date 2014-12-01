@@ -1,6 +1,8 @@
-package database.tests;
+package io.database.tests;
 
 import static org.junit.Assert.assertTrue;
+import io.database.BusinessPartnerGroupUtil;
+import io.database.BusinessPartnerUtil;
 
 import java.util.List;
 
@@ -8,8 +10,6 @@ import org.junit.Test;
 
 import pojo.BusinessPartnerGroup;
 import pojo.BusinessPartner;
-import database.BusinessPartnerGroupUtil;
-import database.BusinessPartnerUtil;
 
 public class BusinessPartnerTest {
 	

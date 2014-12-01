@@ -1,4 +1,4 @@
-package database;
+package io.database;
 
 import java.util.List;
 

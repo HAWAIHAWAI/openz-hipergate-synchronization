@@ -1,12 +1,12 @@
 package io.web;
 
+import io.database.BusinessPartnerUtil;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-
-import database.BusinessPartnerUtil;
 
 @Path("/businessPartner")
 public class BusinessPartnerService {
@@ -27,5 +27,13 @@ public class BusinessPartnerService {
 	  {
 	    String outMsg = io.xml.BusinessPartnerXML.getBusinessPartnerByID(id);
 	    return Response.status(200).entity(outMsg).build();
+	  }
+	  
+	  @GET
+	  @Path("/startImport")
+	  @Produces("text")
+	  public Response startImport(){
+		  String outMessage = "Import";
+		  return Response.status(200).entity(outMessage).build();
 	  }
 }

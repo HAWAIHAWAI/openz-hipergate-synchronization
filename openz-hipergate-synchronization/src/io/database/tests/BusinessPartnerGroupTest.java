@@ -1,6 +1,7 @@
-package database.tests;
+package io.database.tests;
 
 import static org.junit.Assert.assertTrue;
+import io.database.BusinessPartnerGroupUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,7 +9,6 @@ import java.util.UUID;
 import org.junit.Test;
 
 import pojo.BusinessPartnerGroup;
-import database.BusinessPartnerGroupUtil;
 
 public class BusinessPartnerGroupTest {
 	

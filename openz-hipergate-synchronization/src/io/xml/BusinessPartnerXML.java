@@ -15,12 +15,12 @@ public class BusinessPartnerXML {
 	public static String getBusinessPartnerByID(String id){
 	XStream xstream = new XStream(new DomDriver());
 	//xstream.alias("billNumber", String.class);
-	return xstream.toXML(database.BusinessPartnerUtil.getBusinessPartner(id));
+	return xstream.toXML(io.database.BusinessPartnerUtil.getBusinessPartner(id));
 	}
 
 	public static String getAllBusinessPartners() {
 		XStream xstream = new XStream(new DomDriver());
 		//xstream.alias("billNumber", String.class);
-		return xstream.toXML(database.BusinessPartnerUtil.getAllBusinessPartners());
+		return xstream.toXML(io.database.BusinessPartnerUtil.getAllBusinessPartners());
 	}
 }

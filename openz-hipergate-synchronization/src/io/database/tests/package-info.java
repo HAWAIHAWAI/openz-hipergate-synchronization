@@ -3,4 +3,4 @@
  * @author HAWAI
  *
  */
-package database.tests;
+package io.database.tests;

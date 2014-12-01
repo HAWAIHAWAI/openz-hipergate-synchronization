@@ -22,6 +22,8 @@ public class Converter {
 		OpenZGeschaeftspartner obp = new OpenZGeschaeftspartner();
 		obp.setId(bp.getID());
 		obp.setUnternehmensName(bp.getName());
+		obp.setBeschreibung(bp.getDescription());
+		obp.setSteuernummer(bp.getTaxNumber());
 		return obp;
 	}
 

@@ -8,6 +8,8 @@ package io.importing;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 
+import global.Settings;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,7 @@ import java.util.logging.Logger;
  */
 public class MessagingServiceFacade<T> implements IMessagingService<T> {
 
+	private Settings settings;
     private final String InputQueueName = "HAWAI_QUEUE_INPUT";
     private final String OutputQueueName = "HAWAI_QUEUE_OUTPUT";
     public ConnectionFactory factory = null;
@@ -25,8 +28,14 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
     private Publisher publisher = null;
 
     public MessagingServiceFacade() {
+    	try {
+			settings = io.SettingsInstantiation.getSettings();
+		} catch (IOException e) {
+			settings = new Settings();
+			settings.setHipergateLocation("localhost");
+		}
         this.factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost(settings.getHipergateLocation());
         try {
             //ExecutorService executor = Executors.newFixedThreadPool(nThreads);
             //this.rabbitConnection = factory.newConnection(executor);
