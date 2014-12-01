@@ -145,6 +145,95 @@ public class OpenZGeschaeftspartner implements java.io.Serializable{
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((beschreibung == null) ? 0 : beschreibung.hashCode());
+		result = prime * result + ((branche == null) ? 0 : branche.hashCode());
+		result = prime * result
+				+ ((kategorie == null) ? 0 : kategorie.hashCode());
+		result = prime * result + ((land == null) ? 0 : land.hashCode());
+		result = prime * result + postleitzahl;
+		result = prime * result + ((stadt == null) ? 0 : stadt.hashCode());
+		result = prime * result + steuernummer;
+		result = prime * result
+				+ ((straﬂe1UndNr == null) ? 0 : straﬂe1UndNr.hashCode());
+		result = prime * result
+				+ ((straﬂe2UndNr == null) ? 0 : straﬂe2UndNr.hashCode());
+		result = prime * result + telefonnummer;
+		result = prime * result
+				+ ((timestamp == null) ? 0 : timestamp.hashCode());
+		result = prime
+				* result
+				+ ((unternehmensName == null) ? 0 : unternehmensName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OpenZGeschaeftspartner other = (OpenZGeschaeftspartner) obj;
+		if (beschreibung == null) {
+			if (other.beschreibung != null)
+				return false;
+		} else if (!beschreibung.equals(other.beschreibung))
+			return false;
+		if (branche == null) {
+			if (other.branche != null)
+				return false;
+		} else if (!branche.equals(other.branche))
+			return false;
+		if (kategorie == null) {
+			if (other.kategorie != null)
+				return false;
+		} else if (!kategorie.equals(other.kategorie))
+			return false;
+		if (land == null) {
+			if (other.land != null)
+				return false;
+		} else if (!land.equals(other.land))
+			return false;
+		if (postleitzahl != other.postleitzahl)
+			return false;
+		if (stadt == null) {
+			if (other.stadt != null)
+				return false;
+		} else if (!stadt.equals(other.stadt))
+			return false;
+		if (steuernummer != other.steuernummer)
+			return false;
+		if (straﬂe1UndNr == null) {
+			if (other.straﬂe1UndNr != null)
+				return false;
+		} else if (!straﬂe1UndNr.equals(other.straﬂe1UndNr))
+			return false;
+		if (straﬂe2UndNr == null) {
+			if (other.straﬂe2UndNr != null)
+				return false;
+		} else if (!straﬂe2UndNr.equals(other.straﬂe2UndNr))
+			return false;
+		if (telefonnummer != other.telefonnummer)
+			return false;
+		if (timestamp == null) {
+			if (other.timestamp != null)
+				return false;
+		} else if (!timestamp.equals(other.timestamp))
+			return false;
+		if (unternehmensName == null) {
+			if (other.unternehmensName != null)
+				return false;
+		} else if (!unternehmensName.equals(other.unternehmensName))
+			return false;
+		return true;
+	}
     
  
     
