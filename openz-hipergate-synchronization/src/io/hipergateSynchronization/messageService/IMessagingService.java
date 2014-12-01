@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package io.importing;
+package io.hipergateSynchronization.messageService;
 
 /**
  *

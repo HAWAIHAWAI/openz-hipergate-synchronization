@@ -1,16 +1,20 @@
 package pojo;
 
+import io.database.BusinessPartnerUtil;
+
 import java.io.Serializable;
-import java.util.List;
+
+
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -44,7 +48,7 @@ public class BusinessPartner implements Serializable {
 	private String name2;
 	private String taxNumber;
 	private String description;
-	private List<BusinessPartnerGroup> bpGroup;
+	private BusinessPartnerGroup bpGroup;
 	
 	public static final String FIND_BP_BY_ID = "findBusinessPartnerByID";
 	public static final String FIND_ALL_BP = "findAllBusinessPartners";
@@ -76,19 +80,17 @@ public class BusinessPartner implements Serializable {
 		this.name = name;
 	}
 	
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn(name="c_bp_group_id", nullable=false)
-	public List<BusinessPartnerGroup> getBpGroup() {
+	public BusinessPartnerGroup getBpGroup() {
 		return bpGroup;
 	}
 	
-	public void addBpGroup(BusinessPartnerGroup bpGroup) {
-		this.bpGroup.add(bpGroup);
+	public void setBpGroup(BusinessPartnerGroup bpGroup) {
+		this.bpGroup = bpGroup;
 	}
 	
-	public void removeBusinessPartnerGroup(BusinessPartnerGroup bp){
-		this.bpGroup.remove(bp);
-	}
+	
 	
 	@Column(name="taxid")
 	public String getTaxNumber() {
@@ -123,5 +125,9 @@ public class BusinessPartner implements Serializable {
 				+ ", value=" + value + ", name=" + name + ", name2=" + name2
 				+ ", taxNumber=" + taxNumber + ", description=" + description
 				+ ", BusinessPartnerGroup=" + bpGroup + "]";
+	}
+	
+	public void persist() {
+		BusinessPartnerUtil.persistBusinessPartner(this);
 	}
 }

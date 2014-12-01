@@ -1,7 +1,5 @@
 package io.web;
 
-import io.database.BusinessPartnerUtil;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -21,7 +19,7 @@ public class BusinessPartnerService {
 	  }
 	
 	  @GET
-	  @Path("/{id}")
+	  @Path("/id/{id}")
 	  @Produces("text/xml")
 	  public Response getMessage(@PathParam("id") String id)
 	  {
@@ -31,7 +29,7 @@ public class BusinessPartnerService {
 	  
 	  @GET
 	  @Path("/startImport")
-	  @Produces("text")
+	  @Produces("text/plain")
 	  public Response startImport(){
 		  String outMessage = "Import";
 		  return Response.status(200).entity(outMessage).build();

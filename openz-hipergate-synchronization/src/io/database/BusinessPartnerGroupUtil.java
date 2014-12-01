@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import pojo.BusinessPartner;
 import pojo.BusinessPartnerGroup;
 
 public class BusinessPartnerGroupUtil {
@@ -22,6 +23,15 @@ public class BusinessPartnerGroupUtil {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(BusinessPartnerGroup.FIND_ALL_BRANCHEN, BusinessPartnerGroup.class);
 		return query.getResultList();
+	}
+	
+	/**
+	 * @param bp Persist new or updated BusinessPartnerGroup
+	 */
+	public static void persistBusinessPartner(BusinessPartnerGroup bpg){
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		em.persist(bpg);
+		em.getTransaction().commit();
 	}
 
 }

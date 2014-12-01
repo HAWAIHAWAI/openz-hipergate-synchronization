@@ -1,5 +1,7 @@
 package pojo;
 
+import io.database.BusinessPartnerGroupUtil;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -254,5 +256,9 @@ public class BusinessPartnerGroup implements Serializable {
 				+ ", updatedBy=" + updatedBy + ", value=" + value + ", name="
 				+ name + ", description=" + description + ", isDefault="
 				+ isDefault + "]";
+	}
+	
+	public void persist(){
+		BusinessPartnerGroupUtil.persistBusinessPartner(this);
 	}
 }

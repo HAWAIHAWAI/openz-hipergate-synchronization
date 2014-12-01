@@ -5,4 +5,4 @@
  * @author HAWAI
  *
  */
-package io.importing.tests;
+package io.hipergateSynchronization;

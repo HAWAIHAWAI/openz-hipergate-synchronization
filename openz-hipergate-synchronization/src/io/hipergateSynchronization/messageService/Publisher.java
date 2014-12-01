@@ -2,15 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.importing;
+package io.hipergateSynchronization.messageService;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 /**
  *

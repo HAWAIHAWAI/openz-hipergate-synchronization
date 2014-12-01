@@ -3,12 +3,13 @@
  * and open the template in the editor.
  */
 
-package io.importing;
+package io.hipergateSynchronization.messageService;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.QueueingConsumer.Delivery;
+
 import java.io.IOException;
 
 /**
@@ -27,7 +28,8 @@ public class Receiver<T> {
 
     }
     
-    public T receive() throws InterruptedException, IOException, ClassNotFoundException{
+    @SuppressWarnings("unchecked")
+	public T receive() throws InterruptedException, IOException, ClassNotFoundException{
         Channel channel = this.connection.createChannel();
         QueueingConsumer consumer = new QueueingConsumer(channel);
         channel.queueDeclarePassive(this.inputQueue);
@@ -41,7 +43,8 @@ public class Receiver<T> {
         channel.queuePurge(this.inputQueue);
     }
     
-    public T receiveFrom(String queue) throws IOException, ClassNotFoundException, InterruptedException{
+    @SuppressWarnings("unchecked")
+	public T receiveFrom(String queue) throws IOException, ClassNotFoundException, InterruptedException{
         Channel channel = this.connection.createChannel();
         QueueingConsumer consumer = new QueueingConsumer(channel);
         channel.queueDeclarePassive(queue);

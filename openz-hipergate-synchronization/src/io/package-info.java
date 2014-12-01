@@ -1,6 +1,6 @@
 /**
  * Input-/Output related classes
- * @author HAWAI
+ * @author cglaeser
  *
  */
 package io;

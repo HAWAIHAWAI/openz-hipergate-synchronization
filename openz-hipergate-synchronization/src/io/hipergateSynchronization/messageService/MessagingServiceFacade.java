@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package io.importing;
+package io.hipergateSynchronization.messageService;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
@@ -24,8 +24,8 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
     private final String OutputQueueName = "HAWAI_QUEUE_OUTPUT";
     public ConnectionFactory factory = null;
     public Connection rabbitConnection = null;
-    private Receiver receiver = null;
-    private Publisher publisher = null;
+    private Receiver<T> receiver = null;
+    private Publisher<T> publisher = null;
 
     public MessagingServiceFacade() {
     	try {
@@ -44,12 +44,12 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            this.receiver = new Receiver(this.rabbitConnection, InputQueueName);
+            this.receiver = new Receiver<T>(this.rabbitConnection, InputQueueName);
         } catch (IOException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            this.publisher = new Publisher(this.rabbitConnection, OutputQueueName);
+            this.publisher = new Publisher<T>(this.rabbitConnection, OutputQueueName);
         } catch (IOException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,7 +57,7 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
 
     /*
      * Gibt den Inhalt einer Nachricht, als String zurück.
-     * Gibt null zurück, wenn Fehler beim Abfruf aufgetreten sind.
+     * Gibt null zurück, wenn Fehler beim Abruf aufgetreten sind.
      */
     @SuppressWarnings("unchecked")
 	public String warteSynchronAufNachrichten() {

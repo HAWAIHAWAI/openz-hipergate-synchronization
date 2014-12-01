@@ -1,8 +1,8 @@
-package io.importing.tests;
+package io.hipergateSynchronization.messageService.tests;
 
 import static org.junit.Assert.*;
-import io.importing.IMessagingService;
-import io.importing.MessagingServiceFacade;
+import io.hipergateSynchronization.messageService.IMessagingService;
+import io.hipergateSynchronization.messageService.MessagingServiceFacade;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class ConnectionTests {
 
 	@Test
 	public void getObjectTest() {
-		IMessagingService<OpenZGeschaeftspartner> messagingService = new MessagingServiceFacade();
+		IMessagingService<OpenZGeschaeftspartner> messagingService = new MessagingServiceFacade<OpenZGeschaeftspartner>();
 		OpenZGeschaeftspartner oZ = new OpenZGeschaeftspartner();
 		oZ.beschreibung = "Test";
 		oZ.land = "Deutschland";

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.importing;
+package io.hipergateSynchronization.messageService;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,9 +24,9 @@ public class Converter<T> {
         return out.toByteArray();
     }
 
-    public static <T> T deserialize(byte[] data) throws IOException, ClassNotFoundException {
+    @SuppressWarnings("unchecked")
+	public static <T> T deserialize(byte[] data) throws IOException, ClassNotFoundException {
         ByteArrayInputStream in = new ByteArrayInputStream(data);
-        ObjectInputStream is = new ObjectInputStream(in);
-        return (T) is.readObject();
+        return ((T) new ObjectInputStream(in).readObject());
     }
 }
