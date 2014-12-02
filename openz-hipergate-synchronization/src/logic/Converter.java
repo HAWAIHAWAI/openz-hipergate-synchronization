@@ -11,8 +11,9 @@ public class Converter {
 		
 		BusinessPartner bp = new BusinessPartner();
 		bp.setID(obp.getId());
-		//bp.addBpGroup();
+		//bp.setBpGroup();
 		bp.setName(obp.getUnternehmensName());
+		bp.setValue(obp.getUnternehmensName());
 		bp.setDescription(obp.getBeschreibung());
 		bp.setTaxNumber(obp.getSteuernummer());
 		return bp;

@@ -7,6 +7,9 @@ import java.io.Serializable;
 
 
 
+
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.eclipse.persistence.annotations.PrimaryKey;
 
 /**
  * 
@@ -33,9 +38,23 @@ import javax.persistence.Table;
             		"WHERE b.ID = :" + BusinessPartner.PARAM_ID ),
    @NamedQuery(name = BusinessPartner.FIND_ALL_BP,
                     query = "SELECT b " +
-        		            "FROM BusinessPartner b ")
+        		            "FROM BusinessPartner b "),
+   @NamedQuery(name = BusinessPartner.FIND_BP_BY_NAME,
+                            query = "SELECT b " +
+                		            "FROM BusinessPartner b " + 
+                            		"WHERE b.name = :" + BusinessPartner.PARAM_NAME),     		            
 })
 public class BusinessPartner implements Serializable {
+	
+	public BusinessPartner(){
+		id = null;
+		//fullfilling dependency requirements in database table
+		setADClientId("C726FEC915A54A0995C568555DA5BB3C");
+		setADOrgId("5F1A818D54EF4182A30C9235FF8658E5");
+		setCreatedBy("DDAA21D11CB04D4D8EC59E39934B27FB");
+		setUpdatedBy("DDAA21D11CB04D4D8EC59E39934B27FB");
+		value = null;
+	}
 	
 	/**
 	 * 
@@ -49,10 +68,16 @@ public class BusinessPartner implements Serializable {
 	private String taxNumber;
 	private String description;
 	private BusinessPartnerGroup bpGroup;
+	private String ADClientId;
+	private String ADOrgId;
+	private String createdBy;
+	private String updatedBy;
 	
 	public static final String FIND_BP_BY_ID = "findBusinessPartnerByID";
 	public static final String FIND_ALL_BP = "findAllBusinessPartners";
+	public static final String FIND_BP_BY_NAME = "findBusinessPartnerByName";
 	public static final String PARAM_ID = "c_bpartner_id";
+	public static final String PARAM_NAME = "name";
 	
 	@Id
 	@Column(name=PARAM_ID)
@@ -72,25 +97,13 @@ public class BusinessPartner implements Serializable {
 	}
 	
 	@Id
-	@Column(name="name")
+	@Column(name=PARAM_NAME)
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name="c_bp_group_id", nullable=false)
-	public BusinessPartnerGroup getBpGroup() {
-		return bpGroup;
-	}
-	
-	public void setBpGroup(BusinessPartnerGroup bpGroup) {
-		this.bpGroup = bpGroup;
-	}
-	
-	
 	
 	@Column(name="taxid")
 	public String getTaxNumber() {
@@ -116,6 +129,36 @@ public class BusinessPartner implements Serializable {
 		this.description = description;
 	}
 	
+	
+	
+	////Connections in database///
+	@ManyToOne
+	@JoinColumn(name="c_bp_group_id", nullable=false)
+	public BusinessPartnerGroup getBpGroup() {
+		return bpGroup;
+	}
+	
+	public void setBpGroup(BusinessPartnerGroup bpGroup) {
+		this.bpGroup = bpGroup;
+	}
+	
+	@Column(name="ad_client_id")
+	public String getADClientId() {
+		return ADClientId;
+	}
+	public void setADClientId(String adClientId) {
+		this.ADClientId = adClientId;
+	}
+	
+	@Column(name="ad_org_id")
+	public String getADOrgId(){
+		return ADOrgId;
+	}
+	
+	public void setADOrgId(String adOrgId) {
+		this.ADOrgId = adOrgId;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -128,6 +171,23 @@ public class BusinessPartner implements Serializable {
 	}
 	
 	public void persist() {
+		if(this.id==null){
+			this.id = UUID.randomUUID().toString().replaceAll("-", "");
+			System.out.println("id of new instance has been set to " + id);
+		}
+		if(value==null){setValue(name);}
 		BusinessPartnerUtil.persistBusinessPartner(this);
+	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 }

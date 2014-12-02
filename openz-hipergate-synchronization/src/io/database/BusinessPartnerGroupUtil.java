@@ -12,7 +12,7 @@ import pojo.BusinessPartnerGroup;
 public class BusinessPartnerGroupUtil {
 	public static BusinessPartnerGroup getBusinessPartnerGroup(String id){
 		EntityManager em = EntityManagerUtil.getEntityManager();
-		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(BusinessPartnerGroup.FIND_BRANCHE_BY_ID, BusinessPartnerGroup.class);
+		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(BusinessPartnerGroup.FIND_BUSINESSPARTNERGROUP_BY_ID, BusinessPartnerGroup.class);
 		System.out.println("Query" + query);
 		query.setParameter(BusinessPartnerGroup.PARAM_ID, id);
 		
@@ -21,14 +21,21 @@ public class BusinessPartnerGroupUtil {
 	
 	public static List<BusinessPartnerGroup> getAllBusinessPartnerGroups() {
 		EntityManager em = EntityManagerUtil.getEntityManager();
-		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(BusinessPartnerGroup.FIND_ALL_BRANCHEN, BusinessPartnerGroup.class);
+		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(BusinessPartnerGroup.FIND_ALL_BUSINESSPARTNERGROUPS, BusinessPartnerGroup.class);
+		return query.getResultList();
+	}
+	
+	public static List<BusinessPartnerGroup> getAllBusinessPartnerGroupsByName(
+			String string) {
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(BusinessPartnerGroup.FIND_ALL_BUSINESSPARTNERGROUPS, BusinessPartnerGroup.class);
 		return query.getResultList();
 	}
 	
 	/**
 	 * @param bp Persist new or updated BusinessPartnerGroup
 	 */
-	public static void persistBusinessPartner(BusinessPartnerGroup bpg){
+	public static void persistBusinessPartnerGroup(BusinessPartnerGroup bpg){
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		em.persist(bpg);
 		em.getTransaction().commit();

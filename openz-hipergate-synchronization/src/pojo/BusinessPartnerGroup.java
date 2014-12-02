@@ -29,13 +29,17 @@ import javax.persistence.TemporalType;
 @Table(name="c_bp_group")
 @NamedQueries({
 	//NamedQuery zur Auflistung aller Branchen
-	@NamedQuery(name = BusinessPartnerGroup.FIND_BRANCHE_BY_ID,
+   @NamedQuery(name = BusinessPartnerGroup.FIND_BUSINESSPARTNERGROUP_BY_ID,
             query = "SELECT b " +
 		            "FROM BusinessPartnerGroup b " +
             		"WHERE b.ID = :" + BusinessPartnerGroup.PARAM_ID ),
-   @NamedQuery(name = BusinessPartnerGroup.FIND_ALL_BRANCHEN,
+   @NamedQuery(name = BusinessPartnerGroup.FIND_ALL_BUSINESSPARTNERGROUPS,
                     query = "SELECT b " +
-        		            "FROM BusinessPartnerGroup b ")
+        		            "FROM BusinessPartnerGroup b "),
+   @NamedQuery(name = BusinessPartnerGroup.FIND_BUSINESSPARTNERGROUPS_BY_NAME,
+        		            query = "SELECT b " +
+        				            "FROM BusinessPartnerGroup b " +
+        		            		"WHERE b.name = :" + BusinessPartnerGroup.PARAM_NAME ),      		            
 })
 public class BusinessPartnerGroup implements Serializable {
 
@@ -106,10 +110,11 @@ public class BusinessPartnerGroup implements Serializable {
 	private List<BusinessPartner> businessPartners;
 	
 	public static final String PARAM_ID = "c_bp_group_id";
+	public static final String PARAM_NAME = "name";
 	
-	public static final String FIND_BRANCHE_BY_ID = "getBrancheByID";
-
-	public static final String FIND_ALL_BRANCHEN = "findAllBranchen";
+	public static final String FIND_BUSINESSPARTNERGROUP_BY_ID = "getBusinessPartnerGroupByID";
+	public static final String FIND_BUSINESSPARTNERGROUPS_BY_NAME = "getBusinessPartnerGroupByName";
+	public static final String FIND_ALL_BUSINESSPARTNERGROUPS = "findAllBusinessPartnerGroups";
 
 
 	@Id
@@ -209,7 +214,7 @@ public class BusinessPartnerGroup implements Serializable {
 	}
 
 
-	@Column(name="name")
+	@Column(name=PARAM_NAME)
 	public String getName() {
 		return name;
 	}
@@ -259,6 +264,6 @@ public class BusinessPartnerGroup implements Serializable {
 	}
 	
 	public void persist(){
-		BusinessPartnerGroupUtil.persistBusinessPartner(this);
+		BusinessPartnerGroupUtil.persistBusinessPartnerGroup(this);
 	}
 }

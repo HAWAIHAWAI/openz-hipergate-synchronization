@@ -38,7 +38,18 @@ public class BusinessPartnerUtil {
 	 */
 	public static void removeBusinessPartner(BusinessPartner bp){
 		EntityManager em = EntityManagerUtil.getEntityManager();
-		em.remove(bp);
-		em.getTransaction().commit();
+		TypedQuery<BusinessPartner> query = em.createNamedQuery(BusinessPartner.FIND_BP_BY_ID, BusinessPartner.class);
+		query.setParameter(BusinessPartner.PARAM_ID, bp.getID());
+		BusinessPartner removeBP = query.getSingleResult();
+		System.out.println(removeBP);
+		em.remove(removeBP);
+		//em.getTransaction().commit();
+	}
+
+	public static List<BusinessPartner> getAllBusinessPartnersWithName(String name) {
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		TypedQuery<BusinessPartner> query = em.createNamedQuery(BusinessPartner.FIND_BP_BY_NAME, BusinessPartner.class);
+		query.setParameter(BusinessPartner.PARAM_NAME, name);
+		return query.getResultList();
 	}
 }
