@@ -37,13 +37,15 @@ public class BusinessPartnerUtil {
 	 * @param bp Remove businessPartner from persistence context
 	 */
 	public static void removeBusinessPartner(BusinessPartner bp){
+		System.out.println("removeBusinessPartner in BusinessPartnerUtil started");
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<BusinessPartner> query = em.createNamedQuery(BusinessPartner.FIND_BP_BY_ID, BusinessPartner.class);
 		query.setParameter(BusinessPartner.PARAM_ID, bp.getID());
 		BusinessPartner removeBP = query.getSingleResult();
-		System.out.println(removeBP);
+		System.err.println("Entity found: " + removeBP);
 		em.remove(removeBP);
-		//em.getTransaction().commit();
+		em.getTransaction().commit();
+		System.out.println("removeBusinessPartner in BusinessPartnerUtil ended");
 	}
 
 	public static List<BusinessPartner> getAllBusinessPartnersWithName(String name) {
@@ -51,5 +53,17 @@ public class BusinessPartnerUtil {
 		TypedQuery<BusinessPartner> query = em.createNamedQuery(BusinessPartner.FIND_BP_BY_NAME, BusinessPartner.class);
 		query.setParameter(BusinessPartner.PARAM_NAME, name);
 		return query.getResultList();
+	}
+	
+	/**
+	 * @param id
+	 * @return true if Businesspartner with given id exists once, else false
+	 */
+	public static boolean BusinessPartnerExists(String id){
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		TypedQuery<BusinessPartner> query = em.createNamedQuery(BusinessPartner.FIND_BP_BY_ID, BusinessPartner.class);
+		System.out.println("Query" + query);
+		query.setParameter(BusinessPartner.PARAM_ID, id);
+		return (query.getResultList().size()==1);
 	}
 }

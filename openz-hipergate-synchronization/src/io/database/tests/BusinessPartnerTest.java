@@ -1,11 +1,14 @@
 package io.database.tests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import io.database.BusinessPartnerGroupUtil;
 import io.database.BusinessPartnerUtil;
 
 import java.util.List;
+
+import javax.persistence.NoResultException;
 
 import org.junit.Test;
 
@@ -52,17 +55,18 @@ public class BusinessPartnerTest {
 	
 	@Test
 	public void removeBusinessPartnerTest(){
+		System.err.println("remove business partner started");
 		BusinessPartner bp = new BusinessPartner();
 		bp.setName("TestpartnerDatabase");
 		bp.setTaxNumber("somerandomstring");
 		bp.setBpGroup(BusinessPartnerGroupUtil.getAllBusinessPartnerGroupsByName("Lieferanten").get(0));
 		bp.persist();
+		System.err.println("BP after persisting: " + bp);
 		String id = bp.getID();
-		System.out.println("BusinessPartner to be removed: " + bp);
+		System.err.println("BusinessPartner to be removed: " + bp);
 		
 		BusinessPartnerUtil.removeBusinessPartner(bp);
-		
-		System.out.println("BP after removal" + BusinessPartnerUtil.getBusinessPartner(id));
+		assertFalse(BusinessPartnerUtil.BusinessPartnerExists(id));
 	}
 
 }
