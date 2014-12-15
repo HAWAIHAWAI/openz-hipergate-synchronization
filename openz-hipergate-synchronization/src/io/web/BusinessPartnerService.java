@@ -29,12 +29,13 @@ public class BusinessPartnerService {
 	    return Response.status(200).entity(outMsg).build();
 	  }
 	  
+	  //TODO
 	  @GET
 	  @Path("/startImport")
 	  @Produces("text/plain")
 	  public Response startImport(){
 		  StringBuilder sb = new StringBuilder().append("Import");
-		  int numberOfMessages = Synchronization.hipergatePull();
+		  int numberOfMessages = 0; //Synchronization.hipergatePull();
 		  sb.append("NumberOfBusinessPartners edited: " + numberOfMessages);
 		  return Response.status(200).entity(sb.toString()).build();
 	  }

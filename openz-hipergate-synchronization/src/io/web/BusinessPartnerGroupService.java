@@ -20,7 +20,7 @@ public class BusinessPartnerGroupService {
 	  }
 	
 	  @GET
-	  @Path("/{id}")
+	  @Path("/id/{id}")
 	  @Produces("text/xml")
 	  public Response getMessage(@PathParam("id") String id)
 	  {

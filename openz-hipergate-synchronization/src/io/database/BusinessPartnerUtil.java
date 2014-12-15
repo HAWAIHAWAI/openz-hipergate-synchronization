@@ -48,6 +48,10 @@ public class BusinessPartnerUtil {
 		System.out.println("removeBusinessPartner in BusinessPartnerUtil ended");
 	}
 
+	/**
+	 * @param name of the busines partner
+	 * @return Business Partner
+	 */
 	public static List<BusinessPartner> getAllBusinessPartnersWithName(String name) {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<BusinessPartner> query = em.createNamedQuery(BusinessPartner.FIND_BP_BY_NAME, BusinessPartner.class);
