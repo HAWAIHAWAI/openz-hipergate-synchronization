@@ -1,5 +1,7 @@
 package io.web;
 
+import io.hipergateSynchronization.Synchronization;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -31,7 +33,9 @@ public class BusinessPartnerService {
 	  @Path("/startImport")
 	  @Produces("text/plain")
 	  public Response startImport(){
-		  String outMessage = "Import";
-		  return Response.status(200).entity(outMessage).build();
+		  StringBuilder sb = new StringBuilder().append("Import");
+		  int numberOfMessages = Synchronization.hipergatePull();
+		  sb.append("NumberOfBusinessPartners edited: " + numberOfMessages);
+		  return Response.status(200).entity(sb.toString()).build();
 	  }
 }
