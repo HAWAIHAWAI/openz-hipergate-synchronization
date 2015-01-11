@@ -20,9 +20,10 @@ import global.Settings;
  */
 public class SettingsFileGeneration {
 	
-	String hipergateLocation;
-
-
+	/**
+	 * Location of Hipergate.
+	 */
+	private String hipergateLocation;
 
 	/**
 	 * Default values
@@ -33,7 +34,7 @@ public class SettingsFileGeneration {
 	
 	/**
 	 * Custom values
-	 * @param url The url for creasting the XML scaffold
+	 * @param url The url for creating the XML scaffold
 	 * @param updateInterval The update interval in seconds
 	 * @param folderLocation The folder location 
 	 */

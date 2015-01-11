@@ -5,17 +5,22 @@
 
 package pojo;
 
-import java.util.List;
-import java.util.UUID;
 
 /**
+ * Class for Geschaeftspartner from OpenZ.
  *
  * @author Hawai
  */
 public class OpenZGeschaeftspartner implements java.io.Serializable{
 
-    /* Steuernummer des Unternehmens. Sollte eindeutig sein.*/
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1517150760610046850L;
+	
+	/* Steuernummer des Unternehmens. Sollte eindeutig sein.*/
 	public String id;
+	
     public String steuernummer = "";
     public String unternehmensName = null;;
     public String straﬂe1UndNr = null;
@@ -233,6 +238,18 @@ public class OpenZGeschaeftspartner implements java.io.Serializable{
 		} else if (!unternehmensName.equals(other.unternehmensName))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "OpenZGeschaeftspartner [id=" + id + ", steuernummer="
+				+ steuernummer + ", unternehmensName=" + unternehmensName
+				+ ", straﬂe1UndNr=" + straﬂe1UndNr + ", straﬂe2UndNr="
+				+ straﬂe2UndNr + ", postleitzahl=" + postleitzahl + ", land="
+				+ land + ", stadt=" + stadt + ", telefonnummer="
+				+ telefonnummer + ", beschreibung=" + beschreibung
+				+ ", kategorie=" + kategorie + ", branche=" + branche
+				+ ", timestamp=" + timestamp + "]";
 	}
     
  

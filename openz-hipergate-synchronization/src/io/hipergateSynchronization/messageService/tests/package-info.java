@@ -1,7 +1,5 @@
 /**
- * 
- */
-/**
+ * Package for tests.
  * @author HAWAI
  *
  */

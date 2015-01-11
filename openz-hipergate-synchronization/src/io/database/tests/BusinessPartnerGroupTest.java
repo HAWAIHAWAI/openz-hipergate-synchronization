@@ -4,12 +4,17 @@ import static org.junit.Assert.assertTrue;
 import io.database.BusinessPartnerGroupUtil;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.Test;
 
 import pojo.BusinessPartnerGroup;
 
+/**
+ * Testing methods of the class BusinessParterGroup.
+ * 
+ * @author HAWAI
+ *
+ */
 public class BusinessPartnerGroupTest {
 	
 	@Test

@@ -10,15 +10,24 @@ import java.io.IOException;
 
 import com.thoughtworks.xstream.XStream;
 
-
+/**
+ * Class for retrieving settings from a xml-file ("settings.xml").
+ * 
+ * @author cglaeser.
+ */
 public class SettingsInstantiation {
 	
+	/**
+	 * Private - no instantiation.
+	 */
 	private SettingsInstantiation(){}
 	
 	/**
-	 * Reads settings from File
+	 * Reads settings from the settings.xml and retrieves them as a Settings
+	 * object.
+	 * 
+	 * @return Settings object with settings of the settings.xml.
 	 * @throws IOException
-	 *             When file can't be read
 	 */
 	public static Settings getSettings() throws IOException {
 		String path = FileOperations.getProgramDirectory() + File.separator +  "settings.xml";
@@ -39,5 +48,4 @@ public class SettingsInstantiation {
 							);
 		return settings;
 	}
-
 }

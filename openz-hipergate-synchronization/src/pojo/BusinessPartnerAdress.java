@@ -2,6 +2,12 @@ package pojo;
 
 import java.io.Serializable;
 
+/**
+ * Class for Business Partner Address.
+ * 
+ * @author HAWAI
+ *
+ */
 public class BusinessPartnerAdress implements Serializable {
 
 	/**

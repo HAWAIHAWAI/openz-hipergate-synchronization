@@ -3,11 +3,6 @@ package pojo;
 import io.database.BusinessPartnerUtil;
 
 import java.io.Serializable;
-
-
-
-
-
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -17,10 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.eclipse.persistence.annotations.PrimaryKey;
 
 /**
  * 
@@ -46,6 +38,9 @@ import org.eclipse.persistence.annotations.PrimaryKey;
 })
 public class BusinessPartner implements Serializable {
 	
+	/**
+	 * Constructor with default values.
+	 */
 	public BusinessPartner(){
 		id = null;
 		//fullfilling dependency requirements in database table

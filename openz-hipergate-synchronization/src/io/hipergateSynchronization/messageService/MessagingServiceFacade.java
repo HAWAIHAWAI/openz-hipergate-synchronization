@@ -21,8 +21,8 @@ import java.util.logging.Logger;
 public class MessagingServiceFacade<T> implements IMessagingService<T> {
 
 	private Settings settings;
-    private final String InputQueueName = "HAWAI_QUEUE_INPUT";
-    private final String OutputQueueName = "HAWAI_QUEUE_OUTPUT";
+    private final String inputQueue = "FROM_HIPERGATE_TO_OPENZ";
+    private final String outputQueue = "FROM_OPENZ_TO_HIPERGATE";
     public ConnectionFactory factory = null;
     public Connection rabbitConnection = null;
     private Receiver<T> receiver = null;
@@ -45,12 +45,12 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            this.receiver = new Receiver<T>(this.rabbitConnection, InputQueueName);
+            this.receiver = new Receiver<T>(this.rabbitConnection, inputQueue);
         } catch (IOException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            this.publisher = new Publisher<T>(this.rabbitConnection, OutputQueueName);
+            this.publisher = new Publisher<T>(this.rabbitConnection, outputQueue);
         } catch (IOException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,21 +76,14 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
         }
         return null;
     }
-   
-    /*
-     * Legt eine Nachricht message in die Output Queue
-     */
-    public void pushMessage(String message) {
-        try {
-            this.publisher.publish(message);
-        } catch (IOException ex) {
-            Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     public T pullMessage(){
+        return pullMessage(inputQueue);
+    }
+    
+    public T pullMessage(String queue){
         try {
-            return this.receiver.receive();
+            return this.receiver.receiveFrom(queue);
         } catch (InterruptedException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -100,6 +93,7 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
         }
         return null;
     }
+    
     
 	@Override
 	public List<T> pullMessages() {
@@ -116,8 +110,12 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
 	}
 
     public void pushMessage(T obj) {
+        pushMessage(obj, outputQueue);
+    }
+    
+    public void pushMessage(T obj,String queue) {
         try {
-            this.publisher.publish(obj);
+            this.publisher.pushTo(queue, obj);
         } catch (IOException ex) {
             Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -132,16 +130,13 @@ public class MessagingServiceFacade<T> implements IMessagingService<T> {
         }
     }
 
-    public T pullMessageFromOutputQueue() {
-        try {
-            return (T) this.receiver.receiveFrom(OutputQueueName);
-        } catch (IOException ex) {
-            Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MessagingServiceFacade.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+	@Override
+	public String getOutputQueueName() {
+		return this.outputQueue;
+	}
+
+	@Override
+	public String getInputQueueName() {
+		return this.inputQueue;
+	}
 }

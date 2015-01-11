@@ -10,24 +10,33 @@ import java.util.List;
 import pojo.OpenZGeschaeftspartner;
 
 /**
+ * Interface for MessagingService. Provides methods which
+ * must be implementend by a MessagingService for 
+ * interactions with a Message Queue.
  *
  * @author Hawai
  */
 public interface IMessagingService<T> {
 
+	/**
+	 * 
+	 * @return
+	 */
     public String warteSynchronAufNachrichten();
 
-    public void pushMessage(String message);
+    public void pushMessage(T obj, String queue);
     
     public void pushMessage(T obj);
+    
+    public T pullMessage(String string);
     
     public T pullMessage();
     
 	public List<T> pullMessages();
     
     public void purgeAllQueues();
-
-    public T pullMessageFromOutputQueue();
-
-
+    
+    public String getOutputQueueName();
+    
+    public String getInputQueueName();
 }

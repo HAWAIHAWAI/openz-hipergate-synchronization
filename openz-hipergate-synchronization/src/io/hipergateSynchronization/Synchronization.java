@@ -2,35 +2,53 @@ package io.hipergateSynchronization;
 
 import java.util.List;
 
+import logic.Exceptions.UnknownGroupException;
 import pojo.BusinessPartner;
 import pojo.OpenZGeschaeftspartner;
 import io.hipergateSynchronization.messageService.IMessagingService;
 import io.hipergateSynchronization.messageService.MessagingServiceFacade;
 
+/**
+ * This class provides methods to pull Business Partners from Hipergate or to
+ * push Business Partners to Hipergate.
+ * 
+ * @author HAWAI
+ *
+ */
 public class Synchronization {
-	
-	private Synchronization(){}
-	
+
+	private Synchronization() {
+	}
+
 	/**
-	 * @param bp Pushes BusinessPartner to Hipergate
+	 * @param bp
+	 *            Pushes BusinessPartner to Hipergate
 	 */
-	public static void hipergatePush(BusinessPartner bp){
+	public static void hipergatePush(BusinessPartner bp) {
 		IMessagingService<OpenZGeschaeftspartner> iService = new MessagingServiceFacade<OpenZGeschaeftspartner>();
 		iService.pushMessage(logic.Converter.convertToOpenZGeschaftspartner(bp));
-		
+
 	}
-	
+
 	/**
 	 * Pulls all new and/or updated Partners from RabbitMQ-MessageQueue
 	 */
-	public static void hipergatePull(){
+	public static void hipergatePull() {
 		IMessagingService<OpenZGeschaeftspartner> iService = new MessagingServiceFacade<OpenZGeschaeftspartner>();
 		List<OpenZGeschaeftspartner> list = iService.pullMessages();
-		for(OpenZGeschaeftspartner partner:list){
-			BusinessPartner bp = logic.Converter.convertToBusinessPartner(partner);
-			bp.persist();
+		for (OpenZGeschaeftspartner partner : list) {
+			BusinessPartner bp;
+			try {
+				bp = logic.Converter.convertToBusinessPartner(partner);
+				System.out.println("BusinessPartnerToBePersisted" + bp);
+				bp.persist();
+			} catch (UnknownGroupException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
-		
+
 	}
-	
+
 }

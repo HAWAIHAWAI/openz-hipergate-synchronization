@@ -5,13 +5,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- * @author cglaeser
+ * Utility-class to get Entitiy Managers for persistence purposes.
+ * 
+ * @author Christian Gläser
  *
  */
 public class EntityManagerUtil {
 
 	/**
-	 * @return A new EntityManager instance
+	 * Provides an Entity Manager for persistence context.
+	 * 
+	 * @return Entity Manager for perstistence context.
 	 */
 	public static EntityManager getEntityManager() {
 		System.out.println("/**Entity Manager creation started**/");
