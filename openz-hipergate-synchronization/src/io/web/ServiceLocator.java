@@ -10,9 +10,10 @@ import javax.ws.rs.core.Application;
 
 @ApplicationPath("/service")
 public class ServiceLocator extends Application {
-	  Set<Class<?>> services;
+	  private Set<Class<?>> services;
 	  
 	  public ServiceLocator(){
+		  System.err.println("***Service Locator instantiated***");
 		  services = new HashSet<Class<?>>();
 		  addService(BusinessPartnerGroupService.class);
 		  addService(BusinessPartnerService.class);

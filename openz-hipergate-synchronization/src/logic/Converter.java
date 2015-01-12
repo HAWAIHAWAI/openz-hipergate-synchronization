@@ -8,10 +8,11 @@ import java.util.Map;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
-import logic.Exceptions.UnknownGroupException;
+import com.knowgate.hipergate.InformationsKomponente.OpenZGeschaeftspartner;
+
+import logic.exceptions.UnknownGroupException;
 import pojo.BusinessPartner;
 import pojo.BusinessPartnerGroup;
-import pojo.OpenZGeschaeftspartner;
 
 /**
  * Utility class providing methods for converting BusinessPartner to OpenZGeschaeftspartner and vice versa,

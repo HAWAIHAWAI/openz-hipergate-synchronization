@@ -38,6 +38,7 @@ public class BusinessPartnerUtil {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<BusinessPartner> query = em.createNamedQuery(
 				BusinessPartner.FIND_ALL_BP, BusinessPartner.class);
+		em.close();
 		return query.getResultList();
 	}
 
@@ -51,6 +52,7 @@ public class BusinessPartnerUtil {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		em.persist(bp);
 		em.getTransaction().commit();
+		em.close();
 	}
 
 	/**

@@ -9,7 +9,7 @@ import io.hipergateSynchronization.messageService.MessagingServiceFacade;
 
 import org.junit.Test;
 
-import pojo.OpenZGeschaeftspartner;
+import com.knowgate.hipergate.InformationsKomponente.OpenZGeschaeftspartner;
 
 /**
  * Test class for Connection Tests.

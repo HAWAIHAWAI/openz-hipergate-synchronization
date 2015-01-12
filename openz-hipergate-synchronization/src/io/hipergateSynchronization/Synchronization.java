@@ -2,9 +2,10 @@ package io.hipergateSynchronization;
 
 import java.util.List;
 
-import logic.Exceptions.UnknownGroupException;
+import com.knowgate.hipergate.InformationsKomponente.OpenZGeschaeftspartner;
+
+import logic.exceptions.UnknownGroupException;
 import pojo.BusinessPartner;
-import pojo.OpenZGeschaeftspartner;
 import io.hipergateSynchronization.messageService.IMessagingService;
 import io.hipergateSynchronization.messageService.MessagingServiceFacade;
 
@@ -16,7 +17,8 @@ import io.hipergateSynchronization.messageService.MessagingServiceFacade;
  *
  */
 public class Synchronization {
-
+	
+	
 	private Synchronization() {
 	}
 
@@ -34,8 +36,9 @@ public class Synchronization {
 	 * Pulls all new and/or updated Partners from RabbitMQ-MessageQueue
 	 */
 	public static void hipergatePull() {
-		IMessagingService<OpenZGeschaeftspartner> iService = new MessagingServiceFacade<OpenZGeschaeftspartner>();
+		IMessagingService<OpenZGeschaeftspartner> iService =  new MessagingServiceFacade<OpenZGeschaeftspartner>();
 		List<OpenZGeschaeftspartner> list = iService.pullMessages();
+		System.out.println("ListSize: " + list.size());
 		for (OpenZGeschaeftspartner partner : list) {
 			BusinessPartner bp;
 			try {
@@ -46,9 +49,7 @@ public class Synchronization {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 }

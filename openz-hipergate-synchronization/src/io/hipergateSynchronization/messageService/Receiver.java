@@ -44,7 +44,9 @@ public class Receiver<T> {
     
     @SuppressWarnings("unchecked")
 	public List<T> receiveAll() throws InterruptedException, IOException, ClassNotFoundException{
+    	System.out.println("Receiver.receiveAll started");
     	List<T> list = new ArrayList<T>();
+    	System.out.println("List initialized, listSize: 0");
         Channel channel = this.connection.createChannel();
         while(channel.queueDeclarePassive(this.inputQueue).getMessageCount()>0){
         QueueingConsumer consumer = new QueueingConsumer(channel);
@@ -52,7 +54,10 @@ public class Receiver<T> {
         channel.basicConsume(this.inputQueue, true, consumer);
         Delivery deliver = consumer.nextDelivery();
         list.add((T) Converter.deserialize(deliver.getBody()));
+        System.out.println("List size: " + list.size());
         }
+        channel.abort();
+        System.out.println("Channel closed");
         return list;
     } 
 

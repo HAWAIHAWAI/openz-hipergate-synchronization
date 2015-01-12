@@ -7,8 +7,6 @@ package io.hipergateSynchronization.messageService;
 
 import java.util.List;
 
-import pojo.OpenZGeschaeftspartner;
-
 /**
  * Interface for MessagingService. Provides methods which
  * must be implementend by a MessagingService for 
