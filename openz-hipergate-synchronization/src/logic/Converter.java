@@ -5,14 +5,15 @@ import io.database.BusinessPartnerGroupUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+import logic.exceptions.UnknownGroupException;
+
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
-import com.knowgate.hipergate.InformationsKomponente.OpenZGeschaeftspartner;
-
-import logic.exceptions.UnknownGroupException;
 import pojo.BusinessPartner;
 import pojo.BusinessPartnerGroup;
+
+import com.knowgate.hipergate.InformationsKomponente.OpenZGeschaeftspartner;
 
 /**
  * Utility class providing methods for converting BusinessPartner to OpenZGeschaeftspartner and vice versa,
@@ -41,7 +42,7 @@ public class Converter {
 		bp.setName(obp.getUnternehmensName());
 		bp.setValue(obp.getUnternehmensName());
 		bp.setDescription(obp.getBeschreibung());
-		bp.setTaxNumber(obp.getSteuernummer());
+		bp.setTaxid(obp.getSteuernummer());
 		return bp;
 	}
 	
@@ -56,7 +57,7 @@ public class Converter {
 		obp.setKategorie(convertToOpenZBusinessPartnerGroup(bp.getBpGroup()));
 		obp.setUnternehmensName(bp.getName());
 		obp.setBeschreibung(bp.getDescription());
-		obp.setSteuernummer(bp.getTaxNumber());
+		obp.setSteuernummer(bp.getTaxid());
 		return obp;
 	}
 	
@@ -70,7 +71,11 @@ public class Converter {
 	 * CLIENTE = Kunde,CLIENTE POTENCIAL = Potenzieller Kunde,COMPETENCIA = Wettbewerber,PARTNER = Befreundetes Unternehmen, PROVEEDOR = Lieferant
 	 * */
 	public static BusinessPartnerGroup convertToBusinessPartnerGroup(String hipergateGroup) throws UnknownGroupException{
-		String groupID = businessPartnerMapping().get(hipergateGroup);
+		String groupID = getBusinessParterMap().get(hipergateGroup);
+//				businessPartnerMapping().get(hipergateGroup);
+		System.out.println("hipergateGroup: " + hipergateGroup);
+		System.out.println("groupID: " + groupID);
+		System.out.println("****");
 		if(groupID != null){
 		return BusinessPartnerGroupUtil.getBusinessPartnerGroup(groupID);
 		}
@@ -84,6 +89,7 @@ public class Converter {
 	 */
 	public static String convertToOpenZBusinessPartnerGroup(BusinessPartnerGroup bpg) {
 		String groupID = businessPartnerMapping().getKey(bpg.getID());
+	
 		return groupID;
 	}
 	
@@ -98,6 +104,26 @@ public class Converter {
 		groupMap.put("COMPETENCIA", "6F20D1C3640D458CABEF94DAD1BB9903");
 		groupMap.put("PARTNER", "94EEF738862945AE850CA1FF48906927");
 		groupMap.put("PROVEEDOR","01E84103D6AA4B5A84FFFE5787099DB9");
+		
+		for(String key : groupMap.keySet()){
+			System.out.println(key + " " + groupMap.get(key));
+		}
+		
+		return groupMap;
+	}
+	
+	private static Map<String, String> getBusinessParterMap(){
+		Map<String, String> groupMap = new HashMap<String, String>();
+		groupMap.put("CLIENTE","01E84103D6AA4B5A84FFFE5787099DB9");
+		groupMap.put("CLIENTE POTENCIAL", "186B201A1642451DAB37B11EAEFCC1E8");
+		groupMap.put("COMPETENCIA", "6F20D1C3640D458CABEF94DAD1BB9903");
+		groupMap.put("PARTNER", "94EEF738862945AE850CA1FF48906927");
+		groupMap.put("PROVEEDOR","01E84103D6AA4B5A84FFFE5787099DB9");
+		
+		for(String key : groupMap.keySet()){
+			System.out.println(key + " " + groupMap.get(key));
+		}
+		
 		return groupMap;
 	}
 

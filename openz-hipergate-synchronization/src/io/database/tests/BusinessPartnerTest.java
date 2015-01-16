@@ -49,7 +49,7 @@ public class BusinessPartnerTest {
 	public void addBusinessPartner() {
 		BusinessPartner bp = new BusinessPartner();
 		bp.setName("TestpartnerDatabase");
-		bp.setTaxNumber("somerandomstring");
+		bp.setTaxid("somerandomstring");
 		bp.setBpGroup(BusinessPartnerGroupUtil
 				.getAllBusinessPartnerGroupsByName("Lieferanten").get(0));
 		bp.persist();
@@ -66,7 +66,7 @@ public class BusinessPartnerTest {
 		System.err.println("remove business partner started");
 		BusinessPartner bp = new BusinessPartner();
 		bp.setName("TestpartnerDatabase");
-		bp.setTaxNumber("somerandomstring");
+		bp.setTaxid("somerandomstring");
 		bp.setBpGroup(BusinessPartnerGroupUtil
 				.getAllBusinessPartnerGroupsByName("Lieferanten").get(0));
 		bp.persist();

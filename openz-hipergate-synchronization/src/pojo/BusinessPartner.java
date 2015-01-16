@@ -60,7 +60,7 @@ public class BusinessPartner implements Serializable {
 	private String value;
 	private String name;
 	private String name2;
-	private String taxNumber;
+	private String taxid;
 	private String description;
 	private BusinessPartnerGroup bpGroup;
 	private String ADClientId;
@@ -101,11 +101,11 @@ public class BusinessPartner implements Serializable {
 	}
 	
 	@Column(name="taxid")
-	public String getTaxNumber() {
-		return taxNumber;
+	public String getTaxid() {
+		return taxid;
 	}
-	public void setTaxNumber(String taxNumber) {
-		this.taxNumber = taxNumber;
+	public void setTaxid(String taxid) {
+		this.taxid = taxid;
 	}
 	
 	@Column(name="name2")
@@ -161,7 +161,7 @@ public class BusinessPartner implements Serializable {
 	public String toString() {
 		return "BusinessPartner [id=" + id
 				+ ", value=" + value + ", name=" + name + ", name2=" + name2
-				+ ", taxNumber=" + taxNumber + ", description=" + description
+				+ ", taxNumber=" + taxid + ", description=" + description
 				+ ", BusinessPartnerGroup=" + bpGroup + "]";
 	}
 	
