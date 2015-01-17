@@ -1,5 +1,5 @@
 /**
- * Plain Old Java Objects enriched with annotations
+ * Plain Old Java Objects enriched with annotations.
  * @author HAWAI
  *
  */

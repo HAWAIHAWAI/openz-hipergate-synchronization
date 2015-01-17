@@ -96,6 +96,7 @@ public class BusinessPartnerUtil {
 		em.getTransaction().commit();
 		System.out
 				.println("removeBusinessPartner in BusinessPartnerUtil ended");
+		em.close();
 	}
 
 	/**
@@ -112,7 +113,9 @@ public class BusinessPartnerUtil {
 		TypedQuery<BusinessPartner> query = em.createNamedQuery(
 				BusinessPartner.FIND_BP_BY_NAME, BusinessPartner.class);
 		query.setParameter(BusinessPartner.PARAM_NAME, name);
-		return query.getResultList();
+		List<BusinessPartner> listBp = query.getResultList();
+		em.close();
+		return listBp;
 	}
 
 	/**
@@ -130,7 +133,9 @@ public class BusinessPartnerUtil {
 				BusinessPartner.FIND_BP_BY_ID, BusinessPartner.class);
 		System.out.println("Query" + query);
 		query.setParameter(BusinessPartner.PARAM_ID, id);
-		return (query.getResultList().size() == 1);
+		boolean result = (query.getResultList().size() == 1);
+		em.close();
+		return result;
 	}
 
 	/**

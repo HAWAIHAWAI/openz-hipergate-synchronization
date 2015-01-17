@@ -14,10 +14,13 @@ import pojo.BusinessPartnerGroup;
  *
  */
 public class BusinessPartnerGroupUtil {
-	
+
 	/**
 	 * Retrieves the Business Partner Group by ID.
-	 * @param id The ID of the Business Partner Group, which shall be retrieved.
+	 * 
+	 * @param id
+	 *            The ID of the Business Partner Group, which shall be
+	 *            retrieved.
 	 * @return Business Partner Group with the specified ID.
 	 */
 	public static BusinessPartnerGroup getBusinessPartnerGroup(String id) {
@@ -27,12 +30,14 @@ public class BusinessPartnerGroupUtil {
 				BusinessPartnerGroup.class);
 		System.out.println("Query" + query);
 		query.setParameter(BusinessPartnerGroup.PARAM_ID, id);
-
-		return query.getSingleResult();
+		BusinessPartnerGroup bpg = query.getSingleResult();
+		em.close();
+		return bpg;
 	}
 
 	/**
 	 * Retrieves a list with all Business Partner Groups.
+	 * 
 	 * @return List with all Business Partner Groups.
 	 */
 	public static List<BusinessPartnerGroup> getAllBusinessPartnerGroups() {
@@ -46,9 +51,12 @@ public class BusinessPartnerGroupUtil {
 	}
 
 	/**
-	 * Retrieves a list with all Business Partner Group where the name is like / contains the specified string.
-	 * @param name Name to search for.
-	 * @return List with Business Partner Groups with that specified name. 
+	 * Retrieves a list with all Business Partner Group where the name is like /
+	 * contains the specified string.
+	 * 
+	 * @param name
+	 *            Name to search for.
+	 * @return List with Business Partner Groups with that specified name.
 	 */
 	public static List<BusinessPartnerGroup> getAllBusinessPartnerGroupsByName(
 			String name) {
@@ -56,19 +64,23 @@ public class BusinessPartnerGroupUtil {
 		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(
 				BusinessPartnerGroup.FIND_ALL_BUSINESSPARTNERGROUPS,
 				BusinessPartnerGroup.class);
-		return query.getResultList();
+		List<BusinessPartnerGroup> listBpg = query.getResultList();
+		em.close();
+		return listBpg;
 	}
 
 	/**
-	 * Method to persist a BusinessPartnerGroup. 
-	 * Persists new or updated BusinessPartnerGroup.
+	 * Method to persist a BusinessPartnerGroup. Persists new or updated
+	 * BusinessPartnerGroup.
 	 * 
-	 * @param bp BusinessPartnerGroup which shall be persisted.
+	 * @param bp
+	 *            BusinessPartnerGroup which shall be persisted.
 	 */
 	public static void persistBusinessPartnerGroup(BusinessPartnerGroup bpg) {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		em.persist(bpg);
 		em.getTransaction().commit();
+		em.close();
 	}
 
 }

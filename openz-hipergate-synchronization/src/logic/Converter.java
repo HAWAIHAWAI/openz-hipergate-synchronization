@@ -71,7 +71,7 @@ public class Converter {
 	 * CLIENTE = Kunde,CLIENTE POTENCIAL = Potenzieller Kunde,COMPETENCIA = Wettbewerber,PARTNER = Befreundetes Unternehmen, PROVEEDOR = Lieferant
 	 * */
 	public static BusinessPartnerGroup convertToBusinessPartnerGroup(String hipergateGroup) throws UnknownGroupException{
-		String groupID = getBusinessParterMap().get(hipergateGroup);
+		String groupID = getBusinessPartnerUniDiMap().get(hipergateGroup);
 //				businessPartnerMapping().get(hipergateGroup);
 		System.out.println("hipergateGroup: " + hipergateGroup);
 		System.out.println("groupID: " + groupID);
@@ -88,16 +88,20 @@ public class Converter {
 	 * @return OpenzBusinessPartnerGroup object.
 	 */
 	public static String convertToOpenZBusinessPartnerGroup(BusinessPartnerGroup bpg) {
-		String groupID = businessPartnerMapping().getKey(bpg.getID());
+		String groupID = getBusinessPartnerBiDiMapping().getKey(bpg.getID());
 	
 		return groupID;
 	}
 	
 	/**
-	 * Retrieves the mapping for BusinessPartner in Hipergate.
-	 * @return Mapping of the BusinessPartner from Hipergate.
+	 * Retrieves the bidirectional mapping for BusinessPartner in Hipergate.
+	 * The map is a 1:1 mapping with inverse view, so it is possible to get
+	 * a key when you put in a value. See {@link BidiMap#getKey(Object)} for
+	 * value to key mapping.
+	 * @return Bidirectional mapping of the BusinessPartner from Hipergate.
+	 * @see {@link #getBusinessPartnerUniDiMap()} for an unidirectional mapping.
 	 */
-	private static BidiMap<String,String> businessPartnerMapping(){
+	private static BidiMap<String,String> getBusinessPartnerBiDiMapping(){
 		BidiMap<String,String> groupMap = new DualHashBidiMap<String, String>();
 		groupMap.put("CLIENTE","01E84103D6AA4B5A84FFFE5787099DB9");
 		groupMap.put("CLIENTE POTENCIAL", "186B201A1642451DAB37B11EAEFCC1E8");
@@ -112,7 +116,13 @@ public class Converter {
 		return groupMap;
 	}
 	
-	private static Map<String, String> getBusinessParterMap(){
+	/**
+	 * Retrieves the unidirectional mapping for BusinessPartner in Hipergate.
+	 * For bidirectional mapping see {@link #getBusinessPartnerBiDiMapping()}.
+	 * @return Mapping for BusinessPartner in Hipergate.
+	 * @see {@link #getBusinessPartnerBiDiMapping()} for a bidirectional mapping.
+	 */
+	private static Map<String, String> getBusinessPartnerUniDiMap(){
 		Map<String, String> groupMap = new HashMap<String, String>();
 		groupMap.put("CLIENTE","01E84103D6AA4B5A84FFFE5787099DB9");
 		groupMap.put("CLIENTE POTENCIAL", "186B201A1642451DAB37B11EAEFCC1E8");

@@ -1,7 +1,6 @@
 /**
  * 
- */
-/**
+ * Package for exceptions.
  * @author HAWAI
  *
  */

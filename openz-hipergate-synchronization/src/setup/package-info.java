@@ -1,5 +1,5 @@
 /**
- * Package fuer die automatische Einrichtung des Importtools
+ * Package for setting up the tool.
  * @author HAWAI
  *
  */

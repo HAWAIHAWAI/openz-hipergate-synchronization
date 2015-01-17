@@ -1,5 +1,5 @@
 /**
- * pojo related tests
+ * pojo related tests.
  * @author cglaeser
  *
  */

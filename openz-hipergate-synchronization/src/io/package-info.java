@@ -1,5 +1,5 @@
 /**
- * Input-/Output related classes
+ * Input-/Output related classes.
  * @author cglaeser
  *
  */

@@ -1,18 +1,14 @@
 package setup;
 
 
-import java.io.File;
+import global.Settings;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-
-import global.FileOperations;
-import global.Settings;
 
 /**
  * @author Christian Gläser

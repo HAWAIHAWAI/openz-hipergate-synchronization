@@ -15,19 +15,52 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
+ * Implementation of IMessagingService.
+ * MessagingServiceFacade is responsible for receiving and sending messages to queues.
+ * Fixed to InputQueue "FROM_HIPERGATE_TO_OPENZ" and OutputQueue "FROM_OPENZ_TO_HIPERGATE".
  *
  * @author Daniel Glake, cglaeser
  */
 public class MessagingServiceFacade<T> implements IMessagingService<T> {
 
+	/**
+	 * Settings for the MessagingServiceFacade.
+	 */
 	private Settings settings;
+	
+	/**
+	 * Name of the InputQueue.
+	 */
     private final String inputQueue = "FROM_HIPERGATE_TO_OPENZ";
+    
+    /**
+     * Name of the OutputQueue.
+     */
     private final String outputQueue = "FROM_OPENZ_TO_HIPERGATE";
+    
+    /**
+     * Factory for a Connection.
+     */
     public ConnectionFactory factory = null;
+    
+    /**
+     * Connection to RabbitMQ.
+     */
     public Connection rabbitConnection = null;
+    
+    /**
+     * For receiving messages.
+     */
     private Receiver<T> receiver = null;
+    
+    /**
+     * For publishing messages.
+     */
     private Publisher<T> publisher = null;
 
+    /**
+     * Constructor.
+     */
     public MessagingServiceFacade() {
     	try {
 			settings = io.SettingsInstantiation.getSettings();

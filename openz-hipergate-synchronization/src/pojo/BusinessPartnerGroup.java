@@ -5,13 +5,11 @@ import io.database.BusinessPartnerGroupUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -47,6 +45,9 @@ public class BusinessPartnerGroup implements Serializable {
 	 */
 	private static final long serialVersionUID = 2038990287130585695L;
 
+	/**
+	 * Field: c_bp_group_id
+	 */
 	private String id;
 
 	/**

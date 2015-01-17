@@ -1,7 +1,5 @@
 /**
- * 
- */
-/**
+ * Messaging service for hipergate and OpenZ.
  * @author HAWAI
  *
  */

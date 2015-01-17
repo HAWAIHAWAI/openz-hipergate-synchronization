@@ -18,7 +18,7 @@ import com.thoughtworks.xstream.XStream;
 public class SettingsInstantiation {
 	
 	/**
-	 * Private - no instantiation.
+	 * Private - No instantiation.
 	 */
 	private SettingsInstantiation(){}
 	

@@ -17,14 +17,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Class for receiving messages.
  * @author Hawai
  */
 public class Receiver<T> {
 
+	/**
+	 * Name of the InputQueue.
+	 */
     private final String inputQueue;
+    
+    /**
+     * Connection to the InputQueue.
+     */
     public Connection connection = null;
 
+    /**
+     * Constructor.
+     * @param con The connection to the InputQueue.
+     * @param inputQueue The name of the InputQueue.
+     * @throws IOException If an error occurred...
+     */
     public Receiver(Connection con, String inputQueue) throws IOException{
         this.connection = con;
         this.inputQueue = inputQueue;
@@ -32,6 +45,13 @@ public class Receiver<T> {
 
     }
     
+    /**
+     * Receives the next message in the queue.
+     * @return The next message.
+     * @throws InterruptedException if an interrupt is received while waiting.
+     * @throws IOException if an error occurred while waiting.
+     * @throws ClassNotFoundException Class of the message object not found.
+     */
     @SuppressWarnings("unchecked")
 	public T receive() throws InterruptedException, IOException, ClassNotFoundException{
         Channel channel = this.connection.createChannel();
@@ -42,6 +62,13 @@ public class Receiver<T> {
         return (T) Converter.deserialize(deliver.getBody());
     }
     
+    /**
+     * Receives all messages from the InputQueue.
+     * @return All messages as list.
+     * @throws InterruptedException if an interrupt is received while waiting.
+     * @throws IOException if an error occurred while waiting.
+     * @throws ClassNotFoundException Class of the message object not found.
+     */
     @SuppressWarnings("unchecked")
 	public List<T> receiveAll() throws InterruptedException, IOException, ClassNotFoundException{
     	System.out.println("Receiver.receiveAll started");
@@ -61,11 +88,23 @@ public class Receiver<T> {
         return list;
     } 
 
+    /**
+     * Purges the InputQueue.
+     * @throws IOException If an error occurred...
+     */
     void purge() throws IOException {
         Channel channel = connection.createChannel();
         channel.queuePurge(this.inputQueue);
     }
     
+    /**
+     * Receives a message from a specified queue.
+     * @param queue The specified queue.
+     * @return A message from the specified queue.
+     * @throws InterruptedException if an interrupt is received while waiting.
+     * @throws IOException if an error occurred while waiting.
+     * @throws ClassNotFoundException Class of the message object not found.
+     */
     @SuppressWarnings("unchecked")
 	public T receiveFrom(String queue) throws IOException, ClassNotFoundException, InterruptedException{
         Channel channel = this.connection.createChannel();

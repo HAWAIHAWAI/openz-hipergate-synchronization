@@ -9,36 +9,69 @@ import com.rabbitmq.client.Connection;
 import java.io.IOException;
 
 /**
- *
+ * Class for publishing messages.
  * @author Hawai
  */
 public class Publisher<T> {
 
+	/**
+	 * Name of the OutputQueue.
+	 */
     public final String outputQueue;
+    
+    /**
+     * Connection to the queue.
+     */
     private Connection connection = null;
 
+    /**
+     * Constructor.
+     * @param con Connection to the queue.
+     * @param outputQueue Name of the OutputQueue.
+     * @throws IOException
+     */
     public Publisher(Connection con, String outputQueue) throws IOException {
         this.connection = con;
         this.outputQueue = outputQueue;
     }
 
+    /**
+     * Publishes a String message.
+     * @param message The String message to publish.
+     * @throws IOException
+     */
     public void publish(String message) throws IOException {
         Channel channel = connection.createChannel();
         channel.queueDeclarePassive(this.outputQueue);
         channel.basicPublish("", this.outputQueue, null, message.getBytes());
     }
 
+    /**
+     * Publishes a generic message.
+     * @param message The generic message to publish.
+     * @throws IOException
+     */
     public void publish(T message) throws IOException {
         Channel channel = connection.createChannel();
         channel.queueDeclarePassive(this.outputQueue);
         channel.basicPublish("", this.outputQueue, null, Converter.serialize(message));
     }
 
+    /**
+     * Purges the contents of the OutputQueue.
+     * @throws IOException
+     */
     void purge() throws IOException {
         Channel channel = connection.createChannel();
         channel.queuePurge(this.outputQueue);
     }
     
+    /**
+     * Pushes a message to a specified queue.
+     * @param queue
+     * @param message
+     * @throws IOException
+     */
     public void pushTo(String queue, T message) throws IOException{
         Channel channel = connection.createChannel();
         channel.queueDeclarePassive(queue);

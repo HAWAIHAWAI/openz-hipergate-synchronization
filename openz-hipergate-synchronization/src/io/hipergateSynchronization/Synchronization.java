@@ -20,13 +20,15 @@ import io.hipergateSynchronization.messageService.MessagingServiceFacade;
  */
 public class Synchronization {
 	
-	
+	/**
+	 * Private Constructor - No instantiation.
+	 */
 	private Synchronization() {
 	}
 
 	/**
-	 * @param bp
-	 *            Pushes BusinessPartner to Hipergate
+	 * Method to push a BusinessParter to Hipergate.
+	 * @param bp BusinessPartner, which shall be pushed.
 	 */
 	public static void hipergatePush(BusinessPartner bp) {
 		IMessagingService<OpenZGeschaeftspartner> iService = new MessagingServiceFacade<OpenZGeschaeftspartner>();
@@ -35,7 +37,7 @@ public class Synchronization {
 	}
 
 	/**
-	 * Pulls all new and/or updated Partners from RabbitMQ-MessageQueue
+	 * Pulls all new and/or updated Partners from RabbitMQ-MessageQueue.
 	 * @return Number of edited businessPartners
 	 */
 	public static void hipergatePull() {
