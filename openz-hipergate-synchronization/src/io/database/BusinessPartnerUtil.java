@@ -30,8 +30,9 @@ public class BusinessPartnerUtil {
 				BusinessPartner.FIND_BP_BY_ID, BusinessPartner.class);
 		System.out.println("Query" + query);
 		query.setParameter(BusinessPartner.PARAM_ID, id);
-
-		return query.getSingleResult();
+		BusinessPartner bp = query.getSingleResult();
+		em.close();
+		return bp;
 	}
 
 	/**
@@ -40,11 +41,13 @@ public class BusinessPartnerUtil {
 	 * @return List with all Business Partners.
 	 */
 	public static List<BusinessPartner> getAllBusinessPartners() {
+		List<BusinessPartner> listBp = null;
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<BusinessPartner> query = em.createNamedQuery(
 				BusinessPartner.FIND_ALL_BP, BusinessPartner.class);
+		listBp = query.getResultList();
 		em.close();
-		return query.getResultList();
+		return listBp;
 	}
 
 	/**
@@ -130,6 +133,11 @@ public class BusinessPartnerUtil {
 		return (query.getResultList().size() == 1);
 	}
 
+	/**
+	 * Retrieves the Update-query for updating a BusinessPartner.
+	 * @param bp The BusinessPartner, which shall be updated.
+	 * @return Query-String with update information.
+	 */
 	private static String retrieveUpdateQuery(BusinessPartner bp) {
 		String query = "UPDATE BusinessPartner b SET b.name='" + bp.getName()
 				+ "', b.value='" + bp.getValue() 

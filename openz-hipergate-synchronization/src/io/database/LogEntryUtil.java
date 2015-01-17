@@ -3,12 +3,10 @@ package io.database;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import pojo.BusinessPartner;
 import pojo.LogEntry;
+
 
 public class LogEntryUtil {
 	

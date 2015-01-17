@@ -14,9 +14,19 @@ import javax.ws.rs.core.Response;
 
 import pojo.LogEntry;
 
+/**
+ * 
+ * Service related to BusinessPartner(s).
+ * @author HAWAI
+ *
+ */
 @Path("/businessPartner")
 public class BusinessPartnerService {
 
+	/**
+	 * Retrieves the BusinessPartners as GET-response (xml-style).
+	 * @return BusinessPartners information as xml-file.
+	 */
 	  @GET
 	  @Produces("text/xml")
 	  public Response getMessage()
@@ -26,6 +36,11 @@ public class BusinessPartnerService {
 	    return Response.status(200).entity(outMsg).build();
 	  }
 	
+	  /**
+	   * Retrieves a specific BusinessPartner as GET-Response(text-html-style).
+	   * @param id The id to specifiy the BusinessPartner.
+	   * @return BusinessPartner information as text-html.
+	   */
 	  @GET
 	  @Path("/id/{id}")
 	  @Produces("text/xml")
@@ -35,6 +50,13 @@ public class BusinessPartnerService {
 	    return Response.status(200).entity(outMsg).type(MediaType.TEXT_HTML).build();
 	  }
 	  
+
+	  
+	  /**
+	   * Starts the import for BusinessPartners. Pulls the BusinessPartners from the
+	   * Message Queue and persists the entries into the OpenZ-DB.
+	   * @return Logfile as text-html.
+	   */
 	  //TODO
 	  @GET
 	  @Path("/import/start")

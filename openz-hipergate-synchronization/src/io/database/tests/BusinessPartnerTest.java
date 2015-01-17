@@ -20,6 +20,9 @@ import pojo.BusinessPartner;
  */
 public class BusinessPartnerTest {
 
+	/**
+	 * Test for retrieving a single BusinessPartner via ID.
+	 */
 	@Test
 	public void getBusinessPartnerByIDTest() {
 		BusinessPartner bp = BusinessPartnerUtil
@@ -28,6 +31,9 @@ public class BusinessPartnerTest {
 		assertTrue(bp.getName().equals("Lederfabrik Hannes GmbH"));
 	}
 
+	/**
+	 * Test for retrieving all BusinessPartners.
+	 */
 	@Test
 	public void getAllBusinessPartners() {
 		List<BusinessPartner> bpl = BusinessPartnerUtil
@@ -35,6 +41,10 @@ public class BusinessPartnerTest {
 		System.out.println(bpl);
 	}
 
+	/**
+	 * Test for retrieving BusinessPartners where the name is
+	 * like the given String ("name").
+	 */
 	@Test
 	public void getAllBusinessPartnersWithNameTest() {
 		String name = "Lederfabrik Hannes GmbH";
@@ -45,6 +55,12 @@ public class BusinessPartnerTest {
 		assertEquals(bpl.get(0).getName(), name);
 	}
 
+	/**
+	 * Test for adding a single BusinessPartner.
+	 * May fail due DB-specific restrictions ( persist / merge
+	 * behavior is different or not implemented (especially merge in Postgre) ).
+	 * It might be possible to do an "UPSERT" instead of merge or persist.
+	 */
 	@Test
 	public void addBusinessPartner() {
 		BusinessPartner bp = new BusinessPartner();
@@ -61,6 +77,12 @@ public class BusinessPartnerTest {
 		BusinessPartnerUtil.removeBusinessPartner(bp2);
 	}
 
+	/**
+	 * Test for removing a single BusinessParter.
+	 * May fail due DB-specific restrictions ( persist / merge
+	 * behavior is different or not implemented (especially merge in Postgre) ).
+	 * It might be possible to do an "UPSERT" instead of merge or persist.
+	 */
 	@Test
 	public void removeBusinessPartnerTest() {
 		System.err.println("remove business partner started");

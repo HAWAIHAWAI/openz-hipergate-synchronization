@@ -40,7 +40,9 @@ public class BusinessPartnerGroupUtil {
 		TypedQuery<BusinessPartnerGroup> query = em.createNamedQuery(
 				BusinessPartnerGroup.FIND_ALL_BUSINESSPARTNERGROUPS,
 				BusinessPartnerGroup.class);
-		return query.getResultList();
+		List<BusinessPartnerGroup> listBpg = query.getResultList();
+		em.close();
+		return listBpg;
 	}
 
 	/**

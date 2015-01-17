@@ -17,6 +17,9 @@ import pojo.BusinessPartnerGroup;
  */
 public class BusinessPartnerGroupTest {
 	
+	/**
+	 * Test for retrieving a single BusinessPartnerGroup via ID and checking its sector.
+	 */
 	@Test
 	public void getBrancheByIDTest(){
 		BusinessPartnerGroup branche = BusinessPartnerGroupUtil.getBusinessPartnerGroup("79271736C3474B3AB0F21668B7828A00");
@@ -24,6 +27,10 @@ public class BusinessPartnerGroupTest {
 		assertTrue(branche.getName().equals("Mitarbeiter"));
 	}
 	
+	/**
+	 * Test for getting all sectors in the DB.
+	 * May fail due the possibility of more than three sectors.
+	 */
 	@Test
 	public void getAllBranchen(){
 		List<BusinessPartnerGroup> branchen = BusinessPartnerGroupUtil.getAllBusinessPartnerGroups();
