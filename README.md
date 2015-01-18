@@ -1,4 +1,5 @@
 openz-hipergate-synchronization
 ===============================
+OpenZ to Hipergate synchronization,
 
-openz to hipergate synchronization
+[Documentation](https://cdn.rawgit.com/HAWAIHAWAI/openz-hipergate-synchronization/master/openz-hipergate-synchronization/doc/overview-summary.html)
