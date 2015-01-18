@@ -1,1 +1,15 @@
+com.knowgate.hipergate.InformationsKomponente
+global
+io
+io.database
+io.database.tests
+io.hipergateSynchronization
 io.hipergateSynchronization.messageService
+io.hipergateSynchronization.messageService.tests
+io.web
+io.xml
+logic
+logic.exceptions
+pojo
+pojo.tests
+setup
