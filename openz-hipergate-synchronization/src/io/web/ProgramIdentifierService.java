@@ -15,7 +15,7 @@ public class ProgramIdentifierService {
 	
 	  /**
 	   * Returns a simple String with the name of the program.
-	   * @return
+	   * @return Simple String with the name of the program.
 	   */
 	  @GET
 	  @Produces("text/html")

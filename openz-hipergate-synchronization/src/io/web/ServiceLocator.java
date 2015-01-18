@@ -40,7 +40,7 @@ public class ServiceLocator extends Application {
 	  
 	  /**
 	   * Adds an additional service to this ServiceLocater-object.
-	   * @param service
+	   * @param service The service, which shall be added.
 	   */
 	  public void addService(Class<?> service){
 		    services.add(service);
@@ -48,7 +48,7 @@ public class ServiceLocator extends Application {
 	  
 	  /**
 	   * Removes a service from this ServiceLocator-object.
-	   * @param service
+	   * @param service The service, which shall be removed.
 	   */
 	  public void removeService(Class<?> service){
 		  services.remove(service);

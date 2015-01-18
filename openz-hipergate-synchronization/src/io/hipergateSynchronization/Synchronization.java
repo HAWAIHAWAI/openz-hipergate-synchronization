@@ -38,7 +38,6 @@ public class Synchronization {
 
 	/**
 	 * Pulls all new and/or updated Partners from RabbitMQ-MessageQueue.
-	 * @return Number of edited businessPartners
 	 */
 	public static void hipergatePull() {
 		IMessagingService<OpenZGeschaeftspartner> iService =  new MessagingServiceFacade<OpenZGeschaeftspartner>();

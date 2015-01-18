@@ -66,7 +66,7 @@ public class LogEntry implements Serializable {
 	
 	/**
 	 * Setter for the primary key.
-	 * @param id
+	 * @param id The id.
 	 */
 	public void setId(String id) {
 		this.id = id;

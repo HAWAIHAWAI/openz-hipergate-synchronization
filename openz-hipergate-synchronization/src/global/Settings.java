@@ -24,7 +24,7 @@ public class Settings {
 	/**
 	 * Sets the URL where Hipergate is located.
 	 * 
-	 * @param newUrl
+	 * @param location
 	 *            A url in the form "http://www.example.com/resourceIdentifier"
 	 */
 	public void setHipergateLocation(String location) {

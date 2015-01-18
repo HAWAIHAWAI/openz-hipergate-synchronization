@@ -28,7 +28,7 @@ public class Publisher<T> {
      * Constructor.
      * @param con Connection to the queue.
      * @param outputQueue Name of the OutputQueue.
-     * @throws IOException
+     * @throws IOException Error occurred during execution...
      */
     public Publisher(Connection con, String outputQueue) throws IOException {
         this.connection = con;
@@ -38,7 +38,7 @@ public class Publisher<T> {
     /**
      * Publishes a String message.
      * @param message The String message to publish.
-     * @throws IOException
+     * @throws IOException Error occurred during execution...
      */
     public void publish(String message) throws IOException {
         Channel channel = connection.createChannel();
@@ -49,7 +49,7 @@ public class Publisher<T> {
     /**
      * Publishes a generic message.
      * @param message The generic message to publish.
-     * @throws IOException
+     * @throws IOException Error occurred during execution...
      */
     public void publish(T message) throws IOException {
         Channel channel = connection.createChannel();
@@ -68,9 +68,9 @@ public class Publisher<T> {
     
     /**
      * Pushes a message to a specified queue.
-     * @param queue
-     * @param message
-     * @throws IOException
+     * @param queue The name of the queue.
+     * @param message The message to push.
+     * @throws IOException Error occurred during execution...
      */
     public void pushTo(String queue, T message) throws IOException{
         Channel channel = connection.createChannel();

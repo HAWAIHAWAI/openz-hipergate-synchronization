@@ -124,7 +124,7 @@ public class BusinessPartnerUtil {
 	 * @param id
 	 *            ID of the Business Partner. Required to check if a Business
 	 *            Partner with given ID exists.
-	 * @return <cod>true</code> if Businesspartner with given id exists once,
+	 * @return <code>true</code> if Businesspartner with given id exists once,
 	 *         else false.
 	 */
 	public static boolean BusinessPartnerExists(String id) {

@@ -32,6 +32,7 @@ public interface IMessagingService<T> {
     
     /**
      * Pushes a message.
+     * @param obj The obj (message) to push.
      */
     public void pushMessage(T obj);
     

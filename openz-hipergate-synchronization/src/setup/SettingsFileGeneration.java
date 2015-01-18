@@ -30,9 +30,7 @@ public class SettingsFileGeneration {
 	
 	/**
 	 * Custom values
-	 * @param url The url for creating the XML scaffold
-	 * @param updateInterval The update interval in seconds
-	 * @param folderLocation The folder location 
+	 * @param hipergateLocation The url for creating the XML scaffold
 	 */
 	public SettingsFileGeneration(String hipergateLocation){
 		this.hipergateLocation = hipergateLocation;

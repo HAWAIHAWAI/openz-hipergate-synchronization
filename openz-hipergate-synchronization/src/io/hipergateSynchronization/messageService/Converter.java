@@ -23,6 +23,7 @@ public class Converter<T> {
 	 * @param obj Object to serialize.
 	 * @return Byte-array with the serialized object.
 	 * @throws IOException Serialization failed...
+	 * @param <T> The generic class
 	 */
 	public static <T> byte[] serialize(T obj) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -34,6 +35,7 @@ public class Converter<T> {
 	/**
 	 * Deserializes a byte-array and retrieves the object from the byte-array.
 	 * @param data Byte-array, which shall be deserialized.
+	 * @param <T> The generic class
 	 * @return Deserialized object from the byte-array.
 	 * @throws IOException Deserialization failed...
 	 * @throws ClassNotFoundException Class can't be found within the current environment.

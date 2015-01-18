@@ -73,7 +73,7 @@ public class BusinessPartnerGroupUtil {
 	 * Method to persist a BusinessPartnerGroup. Persists new or updated
 	 * BusinessPartnerGroup.
 	 * 
-	 * @param bp
+	 * @param bpg
 	 *            BusinessPartnerGroup which shall be persisted.
 	 */
 	public static void persistBusinessPartnerGroup(BusinessPartnerGroup bpg) {

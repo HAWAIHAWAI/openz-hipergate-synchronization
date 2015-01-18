@@ -1,8 +1,1 @@
-database
-database.tests
-io
-io.tests
-io.web
-io.xml
-pojo
-pojo.tests
+io.hipergateSynchronization.messageService
